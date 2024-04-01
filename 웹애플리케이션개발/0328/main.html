@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <!-- <div id="area">
+
+    </div>
+
+    <div id="area2">
+
+    </div> -->
+
+  </body>
+  <script>
+
+    // let a = 30;
+    // console.log(`abc = ${a} 이라는 문장)`);
+    //
+    // for (let i = 0; i < 50; i++) {
+    //   document.getElementById("area").innerHTML += `<input type="text" name="" value="${i}" id="text${i}">`
+    // }
+
+    // // 1번 - 1
+    // let n = 8;
+    // let star = "";
+    // for (let i = 0; i < n; i++) {
+    //   for (let j = 0; j < (2 * i) + 1; j++ ) {
+    //     star += "*";
+    //   }
+    //   console.log(star);
+    //   star = "";
+    // }
+
+    // 1번 - 2
+    let n = 16;
+    let star = "";
+    for (let i = 1; i < n; i += 2) {
+      star = "";
+      for (let j = 0; j < i; j++ ) {
+        star += "*";
+      }
+      console.log(star);
+    }
+
+    console.log('\n');
+
+    // // 2번 - 1
+    // let n2 = 8;
+    // let star2 = "";
+    // for (let i = 0; i < n2; i++) {
+    //   for (let j = (2 * n2); j > (2 * i) + 1; j--) {
+    //     star2 += "*";
+    //   }
+    //   console.log(star2);
+    //   star2 = "";
+    // }
+
+    // 2번 - 2
+    let n2 = 16;
+    let star2 = "";
+    for (let i = n2 - 1; i > 0; i -= 2) {
+      star2 = "";
+      for (let j = 0; j < i; j++) {
+        star2 += "*";
+      }
+      console.log(star2);
+    }
+
+    console.log('\n');
+
+    // // 3번 - 1
+    // let n3 = 6;
+    // let star3 = "";
+    // for (let i = 1; i <= n3; i++) {
+    //   for (let j = 0; j < 2 ** i; j++ ) {
+    //     star3 += "*";
+    //   }
+    //   console.log(star3);
+    //   star3 = "";
+    // }
+
+    // 3번 - 2
+    let n4 = 6;
+    for (let i = 1; i <= n4; i++) {
+      console.log("*".repeat(2 ** i));
+    }
+    
+
+
+    // for ( alert(1) ; !alert(2); function scqaure() { console.log(alert("4-1")); console.log(alert("4-2")); console.log(alert("4-3")); console.log(alert("4-4")); console.log(alert("4-5"))}() ) {
+      //   alert(3);
+      // } // 즉시실행함수?
+
+  </script>
+</html>

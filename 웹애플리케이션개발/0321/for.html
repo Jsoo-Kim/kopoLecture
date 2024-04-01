@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="area">
+      div area <!-- 밑에서 innerHTML로 텍스트 바꿔버림-->
+    </div>
+    area 밖
+  </body>
+  <script>
+    // 자바스크립트가 병렬 처리 해서 "changed div area" 로 바꾼 다음에 로그 찍을 수도 있음!!
+    console.log(document.getElementById("area"));
+    document.getElementById("area").innerHTML = "changed div area" // changed div area
+    document.getElementById("area").innerHTML += " changed div area" // changed div area changed div area
+    document.getElementById("area").innerHTML = `<input type="text" name="" value="">` // 인풋박스로 바뀜
+
+    for (let i=1; i<=10; i++) {
+      document.getElementById("area").innerHTML += "<br>" + i
+    }
+    for (let i=1; i<=10; i++) {
+      document.getElementById("area").innerHTML += `<br>` + i
+    }
+    for (let i=1; i<=10; i++) {
+      document.getElementById("area").innerHTML += '<br>' + i
+    }
+
+  </script>
+</html>

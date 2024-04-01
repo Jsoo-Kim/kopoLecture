@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+
+  <body>
+    <input type="text" id="googoo" placeholder="구구단의 단 수를 입력해주세요." size="30">
+    <input type="button" id="calc" value="구구단">
+    <button id="reset">초기화</button>
+    <div id="area"></div>
+  </body>
+
+  <script>
+
+    let googooBtn = document.getElementById("calc");
+    let resetBtn = document.getElementById("reset");
+    let resultArea = document.getElementById("area");
+
+    // 구구단 출력
+    googooBtn.addEventListener('click', function() {
+      let googooNum = document.getElementById("googoo").value;
+
+      for (let i = 1; i <= 9; i++) {
+        resultArea.innerHTML += `${googooNum}*${i}=${googooNum * i} <br>`;
+      }
+    });
+
+    // 초기화
+    resetBtn.addEventListener('click', function() {
+      resultArea.innerHTML = "";
+    })
+
+  </script>
+
+</html>

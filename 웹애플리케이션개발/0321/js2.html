@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <input type="text" id="inputBox1"> <br>
+    <input type="text" id="inputBox2"> <br>
+    <button type="button" id="btn">입력</button>
+  </body>
+
+  <script>
+
+    let btn = document.getElementById("btn")
+
+    btn.addEventListener('click', function() {
+      let val1 = Number(document.getElementById("inputBox1").value)
+      let val2 = Number(document.getElementById("inputBox2").value)
+
+      if (!isNaN(val1) && !isNaN(val2)) {
+        if (val1 + val2 >= 10) {
+          console.log("두 숫자의 합이 10 이상입니다.");
+        } else {
+          console.log("두 숫자의 합이 10 미만입니다.");
+        }
+      } else {
+        console.log("올바른 형태의 숫자를 입력하세요.");
+      }
+    });
+  </script>
+</html>

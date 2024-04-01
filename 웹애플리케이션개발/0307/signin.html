@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>0307과제</title>
+  </head>
+  <body>
+    <!-- <h1 style="text-align: center; font-size: 2em; color: green">회원가입</h1> <br> -->
+    <center><font size="10" color="green">회원가입</font></center> <br><br>
+
+    아이디 : <input type="text"> <br>
+    비밀번호 : <input type="password"> <br>
+    재확인 : <input type="password"> <br>
+    이름 : <input type="text"> <br>
+    남자 <input type="radio">
+    여자 <input type="radio"> <br><br>
+
+    생년월일 <br>
+    연도 <input type="text">
+    월
+    <!-- <select>
+      <option>1월</option>
+      <option>2월</option>
+      <option>3월</option>
+      <option>4월</option>
+      <option>5월</option>
+      <option>6월</option>
+      <option>7월</option>
+      <option>8월</option>
+      <option>9월</option>
+      <option>10월</option>
+      <option>11월</option>
+      <option>12월</option>
+    </select> -->
+
+    <select id="monthsSelect"></select>
+
+    <script>
+        const select = document.getElementById('monthsSelect');
+
+        for (let i = 1; i <= 12; i++) {
+            const option = document.createElement('option');
+            option.textContent = i + "월"; // option.text로 해도 됨
+            select.appendChild(option);
+        }
+    </script>
+
+
+    일 <input type="text"> <br>
+    휴대폰번호 <input type="text">
+    <input type="button" value="인증">
+    인증번호 <input type="text">
+    <input type="button" value="확인"> <br><br>
+
+    <button type="button">가입하기</button>
+
+  </body>
+</html>
