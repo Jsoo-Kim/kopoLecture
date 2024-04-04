@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <input type="button" value="대댓글" id="replyBtn">
+    <div id="area">
+
+    </div>
+  </body>
+  <script>
+
+  // let str = "abcdefg";
+  // let arr = [1,2,3,4];
+  // for (let i = 0; i < str.length; i++) {
+  //   if (str[i] == "c") {
+  //     console.log(i);
+  //   }
+  // }
+
+  // let arr = ["3", "6", "9"];
+  //
+  // for (let i = 1; i <= 500; i++) {
+  //   let clabStr = "";
+  //   let numStr = String(i);
+  //
+  //   for (let j = 0; j < numStr.length; j++) {
+  //     if (arr.includes(numStr[j])) {
+  //       clabStr += "짝";
+  //     }
+  //   }
+  //
+  //   if (clabStr == "") {
+  //     console.log(i);
+  //   } else {
+  //     console.log(clabStr);
+  //   }
+
+  for (let j = 1; j < 501; j++) {
+    let num = 123456;
+    num = num + "";
+    let jjackNum = 0;
+
+    for (let i = 0; i < num.length; i++) {
+      if (num[i] == "3" || num[i] == "6" || num[i] == "9") {
+        jjackNum++;
+      }
+    }
+
+    if (jjackNum == 0) {
+      console.log(num);
+    }
+    else {
+      let str = "";
+      for (let k = 0; k < jjackNum; k++) {
+        str += "짝";
+      }
+      console.log(str);
+    }
+  }
+
+
+
+
+  }
+
+  </script>
+</html>
