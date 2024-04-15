@@ -46,15 +46,16 @@ class myHandler(BaseHTTPRequestHandler):
             if ctype == 'application/json':
                 content_length = int(self.headers['Content-Length']) # 48 bytes
                 post_data = self.rfile.read(content_length)
+                print(post_data)
                 receivedData = post_data.decode('utf-8')
                 print(type(receivedData))
                 print("receivedData: " + receivedData)
-                tempDict = json.loads(receivedData) #  load your str into a dict
+                tempDict = json.loads(receivedData) #  load your str into a dict # 문자열을 딕셔너리로 바꿈
                 #print(type(tempDict)) #print(tempDict['this'])
                 self.send_response(200)
                 self.send_header('Content-type', 'application/json')
                 self.end_headers()
-                self.wfile.write(bytes(json.dumps(tempDict), "utf-8"))
+                self.wfile.write(bytes(json.dumps(tempDict), "utf-8")) # json.dumps : json을(딕셔너리를) String으로
 
             elif ctype == 'application/x-www-form-urlencoded':
                 content_length = int(self.headers['content-length'])
