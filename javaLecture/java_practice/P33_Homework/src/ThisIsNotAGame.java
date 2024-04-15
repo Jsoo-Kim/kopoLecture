@@ -1,5 +1,3 @@
-package javaLecture.java_practice.P33_Homework;
-
 import java.util.Scanner;
 
 public class ThisIsNotAGame {

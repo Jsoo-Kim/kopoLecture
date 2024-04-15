@@ -1,7 +1,3 @@
-package javaLecture.java_practice.P33_Homework;
-
-import javaLecture.java_practice.P33_Homework.Base;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,7 +21,12 @@ public class GameState {
         // Base 객체이름 = new 클래스이름(this);
         // this.players.add(객체이름);
         Base minji = new Minji(this);
+        Base hanni = new Hanni(this);
+        Base haerin = new Haerin(this);
         players.add(minji);
+        players.add(hanni);
+        players.add(haerin);
+        
 
         //게임 루프 시작
         System.out.println("\n던전으로 들어갑니다...\n");

@@ -1,4 +1,3 @@
-package javaLecture.java_practice.P33_Homework;
 
 public abstract class Base {
     String name;

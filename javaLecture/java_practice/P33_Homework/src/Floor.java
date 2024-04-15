@@ -1,7 +1,3 @@
-package javaLecture.java_practice.P33_Homework;
-
-import javaLecture.java_practice.P33_Homework.Base;
-import javaLecture.java_practice.P33_Homework.Enemy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,13 +42,25 @@ public class Floor {
             for (Base player : players) {
                 if (!enemies.isEmpty()) {
                     int damage = 0;
-                    Enemy enemy = chooseEnemy(enemies);
+                    Enemy targetEnemy = chooseEnemy(enemies);
 
                     if (player instanceof Minji) {
                         damage = ((Minji) player).attack();
-                    }
+                        targetEnemy.underAttack(damage);
+                        System.out.println(player.name + "가 " + targetEnemy.name + "에게 " + damage + "데미지를 주었습니다.");
+                        System.out.println(targetEnemy.name + "의 남은 hp: " + targetEnemy.hp);
+                    } else if (player instanceof Hanni) {
+                    	damage = ((Hanni) player).attack();
+                    	targetEnemy.underAttack(damage);
+                    	System.out.println(player.name + "가 " + targetEnemy.name + "에게 " + damage + "데미지를 주었습니다.");
+                    	System.out.println(targetEnemy.name + "의 남은 hp: " + targetEnemy.hp);                    	
+                    } else if (player instanceof Haerin) {
+	                	damage = ((Haerin) player).attack();
+	                	targetEnemy.underAttack(damage);
+	                	System.out.println(player.name + "이 " + targetEnemy.name + "에게 " + damage + "데미지를 주었습니다.");
+	                	System.out.println(targetEnemy.name + "의 남은 hp: " + targetEnemy.hp);                    	
+	                }
 
-                    enemy.underAttack(damage);
                 }
             }
 
@@ -63,7 +71,7 @@ public class Floor {
                     int damage = 0;
                     Base targetPlayer = chooseTargetPlayer(players);
                     damage = enemy.attack();
-                    System.out.println(enemy.name + "가 " + targetPlayer.name + "에게" + damage + "데미지를 주었습니다.");
+                    System.out.println(enemy.name + "가 " + targetPlayer.name + "에게 " + damage + "데미지를 주었습니다.");
                     System.out.println(targetPlayer.name + "의 hp " + (targetPlayer.hp - damage));
                     targetPlayer.underAttack(damage);
                 }

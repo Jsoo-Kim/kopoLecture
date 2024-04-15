@@ -1,7 +1,3 @@
-package javaLecture.java_practice.P33_Homework;
-
-import javaLecture.java_practice.P33_Homework.Base;
-
 public class Enemy extends Base {
     private Floor floor;
 

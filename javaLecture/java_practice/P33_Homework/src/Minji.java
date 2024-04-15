@@ -1,5 +1,3 @@
-package javaLecture.java_practice.P33_Homework;
-
 import java.util.Random;
 
 public class Minji extends Base {
@@ -12,9 +10,10 @@ public class Minji extends Base {
 
     public int attack() {
         Random random = new Random();
-        int damage = random.nextInt(41) + 20;
+        int damage = random.nextInt(61) + 20;
         return damage;
     }
+    
     @Override
     public void underAttack(int damage) {
         this.hp -= damage;

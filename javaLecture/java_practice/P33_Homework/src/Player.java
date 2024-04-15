@@ -1,5 +1,3 @@
-package javaLecture.java_practice.P33_Homework;
-
 public class Player extends Base {
     private GameState gameState;
 
