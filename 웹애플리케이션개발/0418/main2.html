@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    1 <input type="radio" name="r1">
+    2 <input type="radio" name="r1">
+    3 <input type="radio" name="r1">
+    4 <input type="radio" name="r1">
+    5 <input type="radio" name="r1">
+    6 <input type="radio" name="r1">
+    7 <input type="radio" name="r1">
+    <button type="button" id="checkBtn">체크</button>
+
+
+  </body>
+  <script>
+
+    let radios = document.getElementsByName("r1");
+    // console.log(radios);
+    let checkBtn = document.getElementById("checkBtn");
+
+    // 방법 1
+    checkBtn.addEventListener('click', function() {
+      for (let i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+          alert(i + 1);
+        }
+      }
+    });
+
+    // 방법 2
+    checkBtn.addEventListener('click', function() {
+      radios.forEach((radio, i) => {
+        if (radio.checked) {
+          alert(i + 1)
+        }
+      })
+    });
+
+  </script>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>main title</title>
+  </head>
+  <body>
+
+  </body>
+  <script>
+
+    // 2차원 배열 선언 함수로 빼놓음
+    function create2DArray(rows, columns) {
+      let arr = new Array(rows);
+      for (let i = 0; i < rows; i++) {
+        arr[i] = new Array(columns);
+      }
+      return arr;
+    }
+
+    // 2차원 배열 선언 람다식
+    const arrRanda = Array.from(Array(5), () => Array(5).fill(null));
+    console.log(arrRanda);
+
+
+    // ---- 1 내 코드
+    let arr1 = create2DArray(5, 5);
+    let arr1Num = 0;
+    for (let i = 0; i < arr1.length; i++) {
+      for (let j = 0; j < arr1[i].length; j++) {
+        arr1[i][j] = ++arr1Num;
+      }
+    }
+    console.log(arr1);
+
+    // ---- 1 교수님 코드
+    // let arr1 = []
+    // let num = 1;
+    // for (let i = 0; i < 5; i++) {
+    // 	arr1[i] = [];
+    // }
+    //
+    // for (let i = 0; i < 5; i++) {
+    // 	for (let j = 0; j < 5; j++) {
+    // 		arr[i][j] = j + 1 + i * 5;
+    // 	}
+    // }
+    // console.log(arr1);
+
+
+    // ---- 2 내 코드
+    let arr2 = create2DArray(5, 5);
+    let arr2Num = 1;
+    for (let i = 0; i < arr2.length; i++) {
+      for (let j = 0; j < arr2[i].length; j++) {
+        arr2[i][j] = arr2Num;
+        arr2Num += 3;
+      }
+    }
+    console.log(arr2);
+
+    // ---- 2 내 코드 2
+    for (let i = 0; i < arr2.length; i++) {
+      for (let j = 0; j < arr2[i].length; j++) {
+        arr2[i][j] = (3 * j + 1) + i * 15 ;
+      }
+    }
+    console.log(arr2);
+
+
+    // ---- 3 내 코드
+    let arr3 = create2DArray(5, 5);
+    for (let i = 0; i < arr3.length; i++) {
+      for (let j = 0; j < arr3[i].length; j++) {
+        arr3[i][j] = i * j;
+      }
+    }
+    console.log(arr3);
+
+
+    // ---- 4 내 코드
+    let arr4 = create2DArray(5, 5);
+    for (let i = 0; i < arr4.length; i++) {
+      for (let j = 0; j < arr4[i].length; j++) {
+        arr4[i][j] = String(i) + String(j);
+      }
+    }
+    console.log(arr4);
+
+    // ---- 4 내 코드 2
+    for (let i = 0; i < arr4.length; i++) {
+      for (let j = 0; j < arr4[i].length; j++) {
+        arr4[i][j] = `${i}${j}`;
+      }
+    }
+    console.log(arr4);
+
+    // ---- 4 교수님 코드
+    // let arr4 = [];
+    //
+    // for (let i = 0; i < arr4.length; i++) {
+    // 	arr4[i] = [];
+    //   for (let j = 0; j < arr4[i].length; j++) {
+    //     arr4[i][j] = i + "" + j;
+    //   }
+    // }
+    // console.log(arr4);
+
+
+
+  </script>
+</html>

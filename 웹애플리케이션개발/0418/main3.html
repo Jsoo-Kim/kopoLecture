@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    1번 &nbsp
+    0 <input type="radio" name="r1"> &nbsp
+    1 <input type="radio" name="r1"> &nbsp
+    2 <input type="radio" name="r1"> &nbsp
+    3 <input type="radio" name="r1"> &nbsp
+    4 <input type="radio" name="r1"> &nbsp
+    가중치 <input type="text" id="weight1"> <br>
+    2번 &nbsp
+    0 <input type="radio" name="r2"> &nbsp
+    1 <input type="radio" name="r2"> &nbsp
+    2 <input type="radio" name="r2"> &nbsp
+    3 <input type="radio" name="r2"> &nbsp
+    4 <input type="radio" name="r2"> &nbsp
+    가중치 <input type="text" id="weight2"> <br>
+    3번 &nbsp
+    0 <input type="radio" name="r3"> &nbsp
+    1 <input type="radio" name="r3"> &nbsp
+    2 <input type="radio" name="r3"> &nbsp
+    3 <input type="radio" name="r3"> &nbsp
+    4 <input type="radio" name="r3"> &nbsp
+    가중치 <input type="text" id="weight3"> <br>
+
+    <div id="printCal">
+
+    </div>
+
+    <button type="button" id="calBtn">계산</button>
+
+
+  </body>
+  <script>
+
+    let radios1 = document.getElementsByName("r1");
+    let radios2 = document.getElementsByName("r2");
+    let radios3 = document.getElementsByName("r3");
+    let printCal = document.getElementById("printCal");
+    let calBtn = document.getElementById("calBtn");
+
+    calBtn.addEventListener('click', function() {
+      let weight1Val = document.getElementById("weight1").value;
+      let weight2Val = document.getElementById("weight2").value;
+      let weight3Val = document.getElementById("weight3").value;
+      let radios1Num, radios2Num, radios3Num;
+
+      for (let i = 0; i < radios1.length; i++) {
+        if (radios1[i].checked) {
+          radios1Num = i;
+        }
+      }
+      for (let i = 0; i < radios2.length; i++) {
+        if (radios2[i].checked) {
+          radios2Num = i;
+        }
+      }
+      for (let i = 0; i < radios3.length; i++) {
+        if (radios3[i].checked) {
+          radios3Num = i;
+        }
+      }
+
+      let calResult = (radios1Num * weight1Val) + (radios2Num * weight2Val) + (radios3Num * weight3Val);
+      printCal.innerHTML = `${radios1Num}x${weight1Val} + ${radios2Num}x${weight2Val} + ${radios3Num}x${weight3Val} = ${calResult}`
+
+    });
+
+
+  </script>
+</html>
