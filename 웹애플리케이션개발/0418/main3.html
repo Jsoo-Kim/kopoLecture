@@ -71,5 +71,34 @@
     });
 
 
+    // ---- 아래처럼 최적화 가능 ---- //
+
+    const calBtn = document.getElementById("calBtn");
+    calBtn.addEventListener('click', function() {
+      let printCal = document.getElementById("printCal");
+      let calResult = 0;
+
+      // 각 라디오 버튼 그룹과 가중치를 반복하여 계산
+      for (let i = 1; i <= 3; i++) {
+        let radios = document.getElementsByName(`r${i}`);
+        let weight = parseFloat(document.getElementById(`weight${i}`).value) || 0;
+        let selectedRadioNum = 0;
+
+        // 선택된 라디오 버튼의 번호 확인
+        radios.forEach(function(radio, index) {
+          if (radio.checked) {
+            selectedRadioNum = index;
+          }
+        });
+
+        // 계산 결과에 더하기
+        calResult += selectedRadioNum * weight;
+      }
+
+      // 결과 출력
+      printCal.innerHTML = `계산 결과: ${calResult}`;
+    });
+
+
   </script>
 </html>
