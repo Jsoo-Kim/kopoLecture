@@ -3,7 +3,7 @@ public class RunClass {
 		DiceGame d1 = new DiceGame();
 		d1.play();
 		d1.play();
-		d1.play2();
-		d1.p3();
+//		d1.play2();
+//		d1.p3();
 	}
 }

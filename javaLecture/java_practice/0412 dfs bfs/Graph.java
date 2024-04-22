@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -8,11 +9,10 @@ import java.util.Stack;
 
 public class Graph {
 	public Node rootNode;
-	public ArrayList nodes = new ArrayList();
+	public ArrayList<Node> nodes = new ArrayList();
 //	public int[][] adjMatrix;// Edges will be represented as adjacency Matrix
-	public Map<Node, List> adjMatrix = new HashMap<>();
-	
-	int size;
+	public Map<Node, List> adjMatrix = new HashMap<>(); // 추가
+//	int size;
 
 	public void setRootNode(Node n) {
 		this.rootNode = n;
@@ -24,14 +24,16 @@ public class Graph {
 
 	public void addNode(Node n) {
 		nodes.add(n);
-		adjMatrix.put(n, new ArrayList()); // 추가
 	}
 
 	// This method will be called to make connect two nodes
 	public void connectNode(Node start, Node end) {
-		if (adjMatrix == null) {
-			size = nodes.size();
+		
+		List nodeList = adjMatrix.get(start); // 추가
+		if (nodeList == null) {
+//			size = nodes.size();
 //			adjMatrix = new int[size][size];
+			nodeList = new ArrayList();
 		}
 
 //		int startIndex = nodes.indexOf(start);
@@ -39,8 +41,8 @@ public class Graph {
 //		adjMatrix[startIndex][endIndex] = 1;
 //		adjMatrix[endIndex][startIndex] = 1;
 		
-		adjMatrix.get(start).add(end); // 추가
-		adjMatrix.get(end).add(start); // 추가
+		nodeList.add(end); // 추가
+		adjMatrix.put(start, nodeList); // 추가 
 		
 	}
 
@@ -54,8 +56,17 @@ public class Graph {
 //			}
 //			j++;
 //		}
+//		
+//		return null;
 		
-		
+		// -- 추가 --
+		List nodeList = adjMatrix.get(n);
+		for (int i = 0; ((nodeList != null) && (i < nodeList.size())); i++) {
+			Node checkNode = (Node) nodeList.get(i);
+			if (checkNode.visited == false) {
+				return checkNode;
+			}
+		}
 		return null;
 	}
 
@@ -103,13 +114,56 @@ public class Graph {
 	}
 
 	// Utility methods for clearing visited property of node
-	private void clearNodes() {
-		int i = 0;
-		while (i < size) {
+	private void clearNodes() { // visited false로 초기
+//		int i = 0;
+//		while (i < size) {
+//			Node n = (Node) nodes.get(i);
+//			n.visited = false;
+//			i++;
+//		}
+		
+		/*
+		for (Object element : nodes) {
+			Node n = (Node) element;
+			n.visited = false;
+		}
+		 */
+		
+		/*
+		for (int i = 0; i < nodes.size(); i++) {
 			Node n = (Node) nodes.get(i);
 			n.visited = false;
-			i++;
 		}
+		*/
+		
+		/*
+		nodes.forEach((element) -> {
+			Node n = (Node) element;
+			n.visited = false;
+		});
+		*/
+		
+		/*
+		Iterator<Node> it = nodes.iterator();
+		while (it.hasNext()) {
+			Node n = (Node) it.next();
+			n.visited = false;
+		}
+		*/
+		
+		nodes.stream().forEach((element) -> {
+			Node n = (Node) element;
+			n.visited = false;
+		});
+		
+		/*
+		nodes = nodes.stream().map(element -> {
+			Node n = new Node(element.label);
+			n.visited = false;
+			return n;
+		}).toList(); // 자바 8 이후부터만 ArrayList도 map() 사용 가능! 그 전은 List는 되고 ArrayList는 안 됨
+		*/
+		
 	}
 
 	// Utility methods for printing the node's label
