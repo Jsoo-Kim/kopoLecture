@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <input type="text" id="inputPrice">
+    <input type="button" id="purchaseBtn" value="구매">
+    <div id="resultArea">
+
+    </div>
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script>
+
+    $("#inputPrice").focus();
+    $("#purchaseBtn").click(function() {
+      let inputPrice = $("#inputPrice").val();
+
+      $.ajax({
+        url: `http://localhost/qspurchase?inputPrice=${inputPrice}`,
+        data: {},
+        success: function(response) {
+          if (response == "구입불가") {
+            alert(response);
+          } else {
+            $("#resultArea").html(response);
+          }
+        }
+      })
+    })
+
+  </script>
+</html>

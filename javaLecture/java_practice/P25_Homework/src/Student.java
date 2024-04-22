@@ -43,5 +43,10 @@ public class Student {
 	void setGradeImprovementRate() { // 최대 점수 대비 오른 점수로 성적향상률 계산
 		this.gradeImprovementRate = ((this.finalTermGrade - this.midTermGrade) / 100) * 100;
 	}
+	
+	@Override
+	public String toString() {
+		return "학생 번호: " + studentId;
+	}
 
 }

@@ -128,7 +128,7 @@ public class RunClass {
 
 		System.out.println("\n[성적 향상 석차]");
 		for (int i = 0; i < gradeImprovementRateArr.length; i++) {
-			System.out.println("" + (i + 1) + "등" + " / 학생 번호: " + gradeImprovementRateArr[i][1]);
+			System.out.println("" + (i + 1) + "등" + " / 학생 번호: " + (int)gradeImprovementRateArr[i][1]);
 		}
 		return gradeImprovementRateArr;
 	}

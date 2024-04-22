@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>main title</title>
+  </head>
+  <body>
+
+    <input type="text" id="inputText">
+    <input type="button" id="inputBtn" value="버튼">
+    <div id="resultArea">
+      original text
+    </div>
+
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script>
+
+    $.ajax({
+      url:'http://localhost/qs?a=10&b=20&c=40',
+      data: {},
+      success:function(response) {
+        console.log(response);
+      }
+    })
+
+    // 그냥 실험
+    // let arr = [1, 2]; // arr 변수는 배열 객체의 참조를 가리킴
+    // console.log(arr); // [1, 2]
+    // arr[0] = 3; // 배열 요소를 변경하더라도 배열 객체의 참조는 변하지 않음
+    // arr[1] = 4; // 배열 요소를 변경하더라도 배열 객체의 참조는 변하지 않음
+    // console.log(arr); // [3, 4]
+
+  </script>
+</html>

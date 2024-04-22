@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>main title</title>
+  </head>
+  <body>
+
+    <input type="text" id="inputNum1">
+    <input type="text" id="inputNum2">
+    <input type="text" id="inputNum3">
+    <input type="button" id="addBtn" value="더하기">
+    <div id="resultArea">
+
+    </div>
+
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script>
+
+    // // -- 방법 1
+    // let inputNum1 = document.getElementById("inputNum1");
+    // let inputNum2 = document.getElementById("inputNum2");
+    // let inputNum3 = document.getElementById("inputNum3");
+    // let addBtn = document.getElementById("addBtn");
+    // let resultArea = document.getElementById("resultArea");
+    //
+    // addBtn.addEventListener('click', function() {
+    //   $.ajax({
+    //     url:`http://localhost/qs2?inputNum1=${inputNum1.value}&inputNum2=${inputNum2.value}&inputNum3=${inputNum3.value}`,
+    //     data: {},
+    //     success:function(response) {
+    //       resultArea.innerHTML = response;
+    //       console.log(response);
+    //     }
+    //   })
+    // })
+
+    // -- 방법 2
+    $("#inputNum1").focus();
+
+    $("#addBtn").click(function() {
+      let num1 = $("#inputNum1").val();
+      let num2 = $("#inputNum2").val();
+      let num3 = $("#inputNum3").val();
+      // console.log(num1, num2, num3);
+      $.ajax({
+        url:`http://localhost/qsplus?num1=${num1}&num2=${num2}&num3=${num3}`,
+        data: {},
+        success:function(response) {
+          $("#resultArea").html(response);
+          // console.log(response);
+        }
+      })
+    })
+
+
+    // let arr5 = [1, 2];
+    // console.log(arr5);
+    // arr5 = [3, 4];
+    // arr5[0] = 1;
+    // arr5[1] = 2;
+    // console.log(arr5);
+
+
+  </script>
+</html>

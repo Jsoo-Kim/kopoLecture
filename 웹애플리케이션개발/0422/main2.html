@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <div class="subway">
+      지하철1 &nbsp
+      있음 <input type="radio" name="subway1" value="있음" checked> &nbsp
+      없음 <input type="radio" name="subway1" value="없음"> &nbsp
+      <br>
+      지하철2 &nbsp
+      있음 <input type="radio" name="subway2" value="있음" checked> &nbsp
+      없음 <input type="radio" name="subway2" value="없음"> &nbsp
+      <br>
+      지하철3 &nbsp
+      있음 <input type="radio" name="subway3" value="있음" checked> &nbsp
+      없음 <input type="radio" name="subway3" value="없음"> &nbsp
+      <br>
+      지하철4 &nbsp
+      있음 <input type="radio" name="subway4" value="있음" checked> &nbsp
+      없음 <input type="radio" name="subway4" value="없음"> &nbsp
+    </div>
+    <br><br>
+
+    <div class="bus">
+      버스1 &nbsp
+      있음 <input type="radio" name="bus1" value="있음" checked> &nbsp
+      없음 <input type="radio" name="bus1" value="없음"> &nbsp
+      <br>
+      버스2 &nbsp
+      있음 <input type="radio" name="bus2" value="있음" checked> &nbsp
+      없음 <input type="radio" name="bus2" value="없음"> &nbsp
+      <br>
+      버스3 &nbsp
+      있음 <input type="radio" name="bus3" value="있음" checked> &nbsp
+      없음 <input type="radio" name="bus3" value="없음"> &nbsp
+    </div>
+    <br><br><br>
+
+
+    <button type="button" id="checkBtn">확인버튼</button>
+
+  </body>
+  <script>
+
+    let subwayRadios = document.getElementsByClassName('subway')[0].getElementsByTagName('input');
+    console.log(subwayRadios);
+    let busRadios = document.getElementsByClassName('bus')[0].getElementsByTagName('input');
+    console.log(busRadios);
+    let checkBtn = document.getElementById("checkBtn");
+
+    checkBtn.addEventListener('click', function() {
+      let subwayCnt = 0;
+      let busCnt = 0;
+
+      for (let i = 0; i < subwayRadios.length; i++) {
+        if (subwayRadios[i].checked && subwayRadios[i].value === "있음") {
+          subwayCnt++;
+        }
+      }
+      for (let i = 0; i < busRadios.length; i++) {
+        if (busRadios[i].checked && busRadios[i].value === "있음") {
+          busCnt++;
+        }
+      }
+
+      if (subwayCnt >= 1 && busCnt >= 1) {
+        alert("귀가 가능");
+      } else {
+        alert("귀가 불가능");
+      }
+
+    });
+
+
+
+
+  </script>
+</html>

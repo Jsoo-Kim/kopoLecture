@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
 	public static void main(String[] args) {
@@ -27,6 +27,14 @@ public class Main {
 		System.out.println(t1);
 		
 		// %o : 8진수 / %h : 16진수 / %3.2f : 실수 소수점 앞은 3자리, 소수점 부분은 2자리
+		
+		
+//		int[] arr = {1, 2}; // arr 변수는 배열 객체의 참조를 가리킴
+//		System.out.println(Arrays.toString(arr)); // [1, 2]
+//		arr[0] = 3; // 배열 요소를 변경하더라도 배열 객체의 참조는 변하지 않음
+//		arr[1] = 4; // 배열 요소를 변경하더라도 배열 객체의 참조는 변하지 않음
+//		System.out.println(Arrays.toString(arr)); // [3, 4]
+
 		
 	}
 }
