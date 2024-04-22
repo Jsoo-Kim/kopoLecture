@@ -110,7 +110,7 @@ public class RunClass {
 				gradeImprovedStudents.add(students[i]);
 			}
 		}
-		System.out.println("성적 향상된 학생 번호 명단: " + gradeImprovedStudents.toString());
+		System.out.println("\n성적 향상된 학생 번호 명단: " + gradeImprovedStudents.toString());
 
 		return gradeImprovedStudents;
 	}
@@ -159,7 +159,7 @@ public class RunClass {
 
 		System.out.println("\n[전체 반 중간고사 석차]");
 		for (int i = 0; i < totalClassMidtermGradeArr.length; i++) {
-			System.out.println("" + (i + 1) + "등" + " / 반 번호: " + totalClassMidtermGradeArr[i][1]);
+			System.out.println("" + (i + 1) + "등" + " / " + totalClassMidtermGradeArr[i][1] + "반");
 		}
 	}
 
@@ -181,7 +181,7 @@ public class RunClass {
 
 		System.out.println("\n[전체 반 기말고사 석차]");
 		for (int i = 0; i < totalClassFinaltermGradeArr.length; i++) {
-			System.out.println("" + (i + 1) + "등" + " / 반 번호: " + totalClassFinaltermGradeArr[i][1]);
+			System.out.println("" + (i + 1) + "등" + " / " + totalClassFinaltermGradeArr[i][1] + "반");
 		}
 	}
 

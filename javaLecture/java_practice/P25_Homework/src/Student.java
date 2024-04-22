@@ -5,6 +5,7 @@ public class Student {
 	int studentId;
 	double midTermGrade;
 	double finalTermGrade;
+	double totalScore;
 	boolean gradeImproved;
 	double gradeImprovementRate;
 
@@ -16,6 +17,7 @@ public class Student {
 		nextStudentId++;
 		this.setMidTermGrade();
 		this.setFinalTermGrade();
+		this.totalScore = midTermGrade + finalTermGrade;
 		this.setGradeImproved();
 		this.setGradeImprovementRate();
 	}
@@ -46,7 +48,7 @@ public class Student {
 	
 	@Override
 	public String toString() {
-		return "학생 번호: " + studentId;
+		return "번호: " + studentId;
 	}
 
 }
