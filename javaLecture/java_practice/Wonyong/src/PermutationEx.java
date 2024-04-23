@@ -1,10 +1,3 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.io.FileInputStream;
-import java.lang.Math;
-import java.lang.reflect.Array;
-
 class PermutationEx {
 
 	public static void main(String args[]) {
@@ -13,14 +6,17 @@ class PermutationEx {
 		char[] arr = str.toCharArray();
 		boolean visited[] = new boolean[n];
 		for (int i = 0; i < n; i++) {
-			visited[i] = false;
+			visited[i] = false; // 초기화
 		}
+
 		char[] branch = new char[n];
-		generatePermutations(arr, n, branch, -1, visited);
+//		generatePermutations(arr, n, branch, -1, visited);
 		System.out.println("----");
+
 		char[] output = new char[n];
 		combination(arr, 3, 0, output, 0);
 		System.out.println("----");
+
 		powerset(arr);
 	}
 
