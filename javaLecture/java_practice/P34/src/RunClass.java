@@ -1,6 +1,6 @@
 public class RunClass {
 	public static void main(String[] args) {
-		
+
 		Test t1 = new Test();
 //		t1.doAction();
 		try {
@@ -8,10 +8,8 @@ public class RunClass {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("오류났음");
-		} finally {
-			System.out.println();
+			System.out.println("catch");
 		}
-		
+		System.out.println();
 	}
 }
