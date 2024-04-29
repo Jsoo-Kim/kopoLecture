@@ -114,7 +114,7 @@ public class Graph {
 	}
 
 	// Utility methods for clearing visited property of node
-	private void clearNodes() { // visited false로 초기
+	private void clearNodes() { // visited를 모두 false 상태로 초기화 
 //		int i = 0;
 //		while (i < size) {
 //			Node n = (Node) nodes.get(i);

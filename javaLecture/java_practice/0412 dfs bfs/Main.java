@@ -30,7 +30,7 @@ public class Main {
 
 		g.connectNode(nB, nE);
 		g.connectNode(nB, nF);
-		g.connectNode(nC, nF);
+		g.connectNode(nC, nF); // ???
 
 		// Perform the traversal of the graph
 		System.out.println("DFS Traversal of a tree is ------------->");
