@@ -6,11 +6,7 @@ class PermutationEx {
 		char[] arr = str.toCharArray();
 		boolean visited[] = new boolean[n];
 		for (int i = 0; i < n; i++) {
-<<<<<<< HEAD
 			visited[i] = false; // 초기화
-=======
-			visited[i] = false;
->>>>>>> 00e522d07bbf7d9ed412f24fe5b1da3def365fcf
 		}
 
 		char[] branch = new char[n];
