@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    국어 : <input type="text" id="korean">
+    <br>
+    영어 : <input type="text" id="english">
+    <br>
+    수학 : <input type="text" id="math">
+    <br>
+    <input type="button" value="석차" id="rankBtn">
+
+    <div id="resultArea">
+    </div>
+
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script>
+
+    $("#korean").focus();
+    $("#rankBtn").click(function() {
+      let korean = $("#korean").val();
+      let english = $("#english").val();
+      let math = $("#math").val();
+
+      $.ajax({
+        url:`http://localhost/rank?korean=${korean}&english=${english}&math=${math}`,
+        data: {},
+        success:function(response) {
+          $("#resultArea").append(response);
+        }
+      })
+
+    })
+
+  </script>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    키 : <input type="text" id="height">
+    <br>
+    몸무게 : <input type="text" id="weight">
+    <br>
+
+    <button type="button" id="printBtn">비만도</button>
+
+    <div id="resultArea">
+    </div>
+
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script>
+
+    $("#height").focus();
+    $("#printBtn").click(function() {
+      let height = $("#height").val();
+      let weight = $("#weight").val();
+      // console.log(height, weight);
+
+      $.ajax({
+        url:`http://localhost/bmi?height=${height}&weight=${weight}`,
+        data: {},
+        success:function(response) {
+          $("#resultArea").html(response);
+        }
+      })
+    })
+
+  </script>
+</html>

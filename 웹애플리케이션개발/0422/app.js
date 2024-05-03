@@ -57,7 +57,7 @@ app.get('/qspurchase', function(req, res) {
     {name: "item4", price: 30000},
     {name: "item5", price: 50000},
     {name: "item6", price: 100000},
-    {name: "item7", price: 500000},
+    {name: "item7", price: 500000}
   ]
   // console.log(items);
 

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <div class="num1">
+      숫자 1 -
+      1 <input type="radio" name="n1" value=1 checked>
+      2 <input type="radio" name="n1" value=2>
+      3 <input type="radio" name="n1" value=3>
+      4 <input type="radio" name="n1" value=4>
+      5 <input type="radio" name="n1" value=5>
+      6 <input type="radio" name="n1" value=6>
+      7 <input type="radio" name="n1" value=7>
+      8 <input type="radio" name="n1" value=8>
+      9 <input type="radio" name="n1" value=9>
+      10 <input type="radio" name="n1" value=10>
+    </div>
+
+    <div class="num2">
+      숫자 2 -
+      1 <input type="radio" name="n2" value=1 checked>
+      2 <input type="radio" name="n2" value=2>
+      3 <input type="radio" name="n2" value=3>
+      4 <input type="radio" name="n2" value=4>
+      5 <input type="radio" name="n2" value=5>
+      6 <input type="radio" name="n2" value=6>
+      7 <input type="radio" name="n2" value=7>
+      8 <input type="radio" name="n2" value=8>
+      9 <input type="radio" name="n2" value=9>
+      10 <input type="radio" name="n2" value=10>
+    </div>
+
+    <div class="num3">
+      숫자 3 -
+      1 <input type="radio" name="n3" value=1 checked>
+      2 <input type="radio" name="n3" value=2>
+      3 <input type="radio" name="n3" value=3>
+      4 <input type="radio" name="n3" value=4>
+      5 <input type="radio" name="n3" value=5>
+      6 <input type="radio" name="n3" value=6>
+      7 <input type="radio" name="n3" value=7>
+      8 <input type="radio" name="n3" value=8>
+      9 <input type="radio" name="n3" value=9>
+      10 <input type="radio" name="n3" value=10>
+    </div>
+
+    <div class="num4">
+      숫자 4 -
+      1 <input type="radio" name="n4" value=1 checked>
+      2 <input type="radio" name="n4" value=2>
+      3 <input type="radio" name="n4" value=3>
+      4 <input type="radio" name="n4" value=4>
+      5 <input type="radio" name="n4" value=5>
+      6 <input type="radio" name="n4" value=6>
+      7 <input type="radio" name="n4" value=7>
+      8 <input type="radio" name="n4" value=8>
+      9 <input type="radio" name="n4" value=9>
+      10 <input type="radio" name="n4" value=10>
+    </div>
+
+    <button type="button" id="consolePrintBtn">출력</button>
+
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script>
+
+    $("#consolePrintBtn").click(function() {
+        let nums = [];
+        // console.log(typeof $(".num1 input:checked").val());
+
+        for (let i = 1; i <= 4; i++) {
+          nums.push(parseInt($(`.num${i} input:checked`).val()));
+        }
+
+        // console.log(nums);
+
+        let max = Number.MIN_SAFE_INTEGER;
+        let min = Number.MAX_SAFE_INTEGER;
+
+        for (let num of nums) {
+          max = Math.max(max, num);
+          min = Math.min(min, num);
+        }
+
+        let result = Math.pow(max, min);
+        console.log(result);
+    })
+
+  </script>
+</html>

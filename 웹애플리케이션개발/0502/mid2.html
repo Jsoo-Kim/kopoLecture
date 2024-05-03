@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <div id="inputArea">
+    </div>
+
+    <button type="button" id="addInputBtn">추가</button>
+    <button type="button" id="printBtn">출력</button>
+
+    <div id="resultArea">
+    </div>
+
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script>
+    // 인풋창 추가
+    let idx = 1;
+    $("#addInputBtn").click(function() {
+      let inputId = "input" + idx;
+      // $("#inputArea").html($("#inputArea").html() + `<input type="text" id="${inputId}"><br>`);
+       $("#inputArea").append(`<input type="text" id="${inputId}"><br>`);
+      // console.log("추가된 input 텍스트 박스 아이디:", inputId);
+      idx++;
+    })
+
+    // 결과 출력
+    let result = 1;
+    $("#printBtn").click(function() {
+      for (let i = 1; i <= idx; i++) {
+        let inputValue = parseFloat($(`#input${i}`).val());
+        if (!isNaN(inputValue)) {
+          result *= inputValue;
+        }
+      }
+      // console.log(result);
+      $("#resultArea").html(String(result));
+      result = 1;
+    })
+
+
+  </script>
+</html>

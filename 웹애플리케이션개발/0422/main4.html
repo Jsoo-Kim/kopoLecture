@@ -48,7 +48,8 @@
         url:`http://localhost/qsplus?num1=${num1}&num2=${num2}&num3=${num3}`,
         data: {},
         success:function(response) {
-          $("#resultArea").html(response);
+          // $("#resultArea").html(response);
+          $("#resultArea").html($("#resultArea").html() + response);
           // console.log(response);
         }
       })
