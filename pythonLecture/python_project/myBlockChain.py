@@ -26,7 +26,7 @@ g_txFileName = "txData.csv"
 g_bcFileName = "blockchain.csv"
 g_nodelstFileName = "nodelst.csv"
 g_receiveNewBlock = "/node/receiveNewBlock"
-g_difficulty = 5 # 난이도! 앞에 0이 5개인 값으로 설정한 것?
+g_difficulty = 6 # 난이도! 앞에 0이 5개인 값으로 설정한 것?
 g_maximumTry = 100
 g_nodeList = {'127.0.0.1':'8668'} # trusted server list, should be checked manually
 
@@ -46,7 +46,7 @@ class Block:
 
 class txData:
 
-    def __init__(self, commitYN, sender, amount, receiver, uuid):
+    def __init__(self, commitYN, sender, amount, receiver, uuid): # commitYN = 블록에 포함됐는지 여부
         self.commitYN = commitYN
         self.sender = sender
         self.amount = amount
@@ -148,13 +148,13 @@ def readBlockchain(blockchainFilePath, mode = 'internal'): # 내부적으로 호
             blockReader = csv.reader(file) # csv (Comma Seperated Value) 형태로 읽어라
             for line in blockReader:
                 block = Block(line[0], line[1], line[2], line[3], line[4], line[5]) # 아까 파라미터 6개 받은 것 그대로 리스트에 담음
-                importedBlockchain.append(block)
+                importedBlockchain.append(block) # 블록체인에 붙임
 
         print("Pulling blockchain from csv...")
 
-        return importedBlockchain
+        return importedBlockchain # 이전 블록 하나만 뜨면 되는데 다 붙어서 나옴? => 잘못 만들었으니 수정해야 한다!? 잘하면 1줄로 끝남
 
-    except:
+    except: # 블록이 하나도 없으면 여기로
         if mode == 'internal' :
             blockchain = generateGenesisBlock()
             importedBlockchain.append(blockchain)
@@ -165,7 +165,7 @@ def readBlockchain(blockchainFilePath, mode = 'internal'): # 내부적으로 호
 
 def updateTx(blockData) :
 
-    phrase = re.compile(r"\w+[-]\w+[-]\w+[-]\w+[-]\w+") # [6b3b3c1e-858d-4e3b-b012-8faac98b49a8]UserID hwang sent 333 bitTokens to UserID kim.
+    phrase = re.compile(r"\w+[-]\w+[-]\w+[-]\w+[-]\w+") # [6b3b3c1e-858d-4e3b-b012-8faac98b49a8]UserID hwang sent 333 bitTokens to UserID kim. ( + : 하나 이상, w : 여러 개 )
     matchList = phrase.findall(blockData.data)
 
     if len(matchList) == 0 :
@@ -195,23 +195,23 @@ def updateTx(blockData) :
 # Reason for time.sleep ():
 # prevents server overload due to repeated error message output and gives 3 seconds of delay to allow time for other users to wait without opening file while editing and saving csv file.
 # Removed temp files to reduce memory usage and increase work efficiency.
-def writeTx(txRawData):
+def writeTx(txRawData): # 리스트 안에 객체가 여러 개 있는 형태의 데이터 받음
     print(g_txFileName)
     txDataList = []
     txOriginalList = []
-    for txDatum in txRawData:
+    for txDatum in txRawData: # 객체에 접근해서 value들을 꺼냄! 문자열로 변환하기 위해
         txList = [txDatum.commitYN, txDatum.sender, txDatum.amount, txDatum.receiver, txDatum.uuid]
         txDataList.append(txList)
 
     try:
-        with open(g_txFileName, 'r', newline='') as csvfile:
+        with open(g_txFileName, 'r', newline='') as csvfile: # 기존 것부터 읽고 내 거 추가
             reader = csv.reader(csvfile)
             for row in reader:
                 txOriginalList.append(row)
 
             openWriteTx = False
             while not openWriteTx:
-                lock.acquire()
+                lock.acquire() # 스레드 간 동일 자원 점유 상태 확인! 다른 사람이 파일 열고 있을 수도 있으니까 다른 작업 끝나야 내가 점유 가능
                 try:
                     print("NewTxData lock.acquire")
                     with open(g_txFileName, 'w', newline='') as csvfile:
@@ -226,7 +226,7 @@ def writeTx(txRawData):
 
                 except Exception as e:
                     print(e)
-                    time.sleep(3)
+                    time.sleep(3) # 3초 쉬고 다시 점유 확인하나? 바람직한 코드는 아니긴 함! 더 좋은 방법 있음
                     print("file open error")
                     lock.release()
     except:
@@ -240,7 +240,7 @@ def writeTx(txRawData):
     return 1
     print('txData written to txData.csv.')
 
-def readTx(txFilePath):
+def readTx(txFilePath): # 블록만 csv로 보관하지 않음. 블록에 포함된 트랜잭션도 csv로 포함! 네트워크 상의 트랜잭션 풀에 존재 => 채굴업자가 수수료 많은 순으로 읽어와서 트랜잭션 데이터 객체로 변환
     print("readTx")
     importedTx = []
 
@@ -248,9 +248,9 @@ def readTx(txFilePath):
         with open(txFilePath, 'r',  newline='') as file:
             txReader = csv.reader(file)
             for row in txReader:
-                if row[0] == '0': # find unmined txData
-                    line = txData(row[0],row[1],row[2],row[3],row[4])
-                    importedTx.append(line)
+                if row[0] == '0': # 블록체인에 미포함된 트랜잭션만
+                    line = txData(row[0],row[1],row[2],row[3],row[4]) #  트랜잭션 데이터 객체로 변환
+                    importedTx.append(line) # 리스트에 붙임
         print("Pulling txData from csv...")
         return importedTx
     except:
@@ -258,11 +258,11 @@ def readTx(txFilePath):
 
 def getTxData():
     strTxData = ''
-    importedTx = readTx(g_txFileName)
-    if len(importedTx) > 0 :
+    importedTx = readTx(g_txFileName) # 트랜잭션을 어디선가 읽어옴
+    if len(importedTx) > 0 : # 하나라도 있으면?
         for i in importedTx:
             print(i.__dict__)
-            transaction = "["+ i.uuid + "]" "UserID " + i.sender + " sent " + i.amount + " bitTokens to UserID " + i.receiver + ". " #
+            transaction = "["+ i.uuid + "]" "UserID " + i.sender + " sent " + i.amount + " bitTokens to UserID " + i.receiver + ". "  # 트랜잭션 정보 담은 문자열 생성
             print(transaction)
             strTxData += transaction
 
@@ -283,7 +283,7 @@ def mineNewBlock(difficulty=g_difficulty, blockchainPath=g_bcFileName): # 난이
 
     while not newBlockFound:
         newBlockAttempt = generateNextBlock(blockchain, strTxData, timestamp, proof)
-        if newBlockAttempt.currentHash[0:difficulty] == '0' * difficulty:  # 난이도 만족 여부 체크
+        if newBlockAttempt.currentHash[0:difficulty] == '0' * difficulty:  # 난이도 만족 여부 체크 (앞에 0이 특정 개수만큼 붙어 있는지) => 5개 붙어있으면 100만번 돌려야된다?!
             stopTime = time.time()
             timer = stopTime - timestamp
             print('New block found with proof', proof, 'in', round(timer, 2), 'seconds.')
@@ -292,7 +292,7 @@ def mineNewBlock(difficulty=g_difficulty, blockchainPath=g_bcFileName): # 난이
             proof += 1
 
     blockchain.append(newBlockAttempt) # 블록 체이닝
-    writeBlockchain(blockchain)
+    writeBlockchain(blockchain) # 여기에서 csv 파일로 만듦
 
 def mine():
     mineNewBlock()
@@ -327,16 +327,16 @@ def isValidNewBlock(newBlock, previousBlock):
         return False
     return True
 
-def newtx(txToMining):
+def newtx(txToMining): # 딕셔너리 데이터가 들어옴
 
     newtxData = []
     # transform given data to txData object
-    for line in txToMining:
+    for line in txToMining: # 데이터 건수만큼 돌기
         tx = txData(0, line['sender'], line['amount'], line['receiver'], uuid.uuid4())
         newtxData.append(tx)
 
     # limitation check : max 5 tx
-    if len(newtxData) > 5 :
+    if len(newtxData) > 5 : # 이렇게 하드코딩 하면 안 됨
         print('number of requested tx exceeds limitation')
         return -1
 
@@ -374,19 +374,19 @@ def isValidChain(bcToValidate):
         return False
 
     # compare the given data with genesisBlock
-    if not isSameBlock(bcToValidateForBlock[0], genesisBlock[0]):
+    if not isSameBlock(bcToValidateForBlock[0], genesisBlock[0]): # 출발점부터 검증
         print('Genesis Block Incorrect')
         return False
 
     # tempBlocks = [bcToValidateForBlock[0]]
     # for i in range(1, len(bcToValidateForBlock)):
-    #    if isValidNewBlock(bcToValidateForBlock[i], tempBlocks[i - 1]):
+    #    if isValidNewBlock(bcToValidateForBlock[i], tempBlocks[i - 1]): # (리팩토링 한 부분인데 아직도 고칠 부분 있음) 이전 블록만 비교?
     #        tempBlocks.append(bcToValidateForBlock[i])
     #    else:
     #        return False
 
     for i in range(0, len(bcToValidateForBlock)):
-        if isSameBlock(genesisBlock[i], bcToValidateForBlock[i]) == False:
+        if isSameBlock(genesisBlock[i], bcToValidateForBlock[i]) == False: # 0번 블록끼리, 1번 블록끼리, 2번 블록끼리
             return False
 
     return True
@@ -504,7 +504,7 @@ def broadcastNewBlock(blockchain):
                                         writer.writerow(row)
                                 else:
                                     writer.writerow(row)
-                    shutil.move(tempfile.name, g_nodelstFileName)
+                    shutil.move(tempfile.name, g_nodelstFileName) # 파일(데이터) 손실 가능성을 막기 위해 오리지널 파일을 temp 파일에 카피
                     csvfile.close()
                     tempfile.close()
                 except:
@@ -829,9 +829,9 @@ class myHandler(BaseHTTPRequestHandler):
             elif None != re.search('/block/newtx', self.path):
                 ctype, pdict = cgi.parse_header(self.headers['content-type'])
                 if ctype == 'application/json':
-                    content_length = int(self.headers['Content-Length'])
-                    post_data = self.rfile.read(content_length)
-                    receivedData = post_data.decode('utf-8')
+                    content_length = int(self.headers['Content-Length']) # 몇 byte인지 (포스트맨에 보면 우리가 리퀘스트 보내는 순간 자동 계산해서 넣어주는 걸로 되어 있음)
+                    post_data = self.rfile.read(content_length) # binary 데이터
+                    receivedData = post_data.decode('utf-8') # decode => 파이썬에서 인식 가능한 String 자료가 됨
                     print(type(receivedData))
                     tempDict = json.loads(receivedData)
                     res = newtx(tempDict)
