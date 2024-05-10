@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    키 : <input type="text" id="height"><br>
+    몸무게 : <input type="text" id="weight"><br>
+    <input type="button" id="checkBtn" value="검사">
+
+    <div id="resultArea">
+    </div>
+
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script>
+
+    $("#height").focus();
+    $("#checkBtn").click(function() {
+      let height = $("#height").val();
+      let weight = $("#weight").val();
+
+      $.ajax({
+        url:`http://localhost/calcBmi?height=${height}&weight=${weight}`,
+        data: {},
+        success:function(response) {
+          $("#resultArea").html(`bmi : ${response.bmi} 결과 : ${response.result}`);
+        }
+      })
+    })
+
+  </script>
+</html>

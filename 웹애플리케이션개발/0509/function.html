@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>function</title>
+</head>
+
+<body>
+    <input type="text" id="input1"></input><br>
+    <input type="text" id="input2"></input><br>
+    <input type="text" id="input3"></input><br>
+    <input type="button" value="결과" id="resultBtn">
+</body>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+
+    $("#input1").focus();
+
+    $("input[type='text']").keypress(function (event) {
+        if (event.which == 13) { // 13은 엔터 키의 keycode
+            printMaxNum();
+        }
+    });
+
+    $("#resultBtn").click(printMaxNum);
+
+    function printMaxNum() {
+        let nums = [];
+        for (let i = 1; i <= 3; i++) {
+            let num = Number($(`#input${i}`).val());
+            nums.push(num);
+        }
+
+        let maxNum = Number.MIN_SAFE_INTEGER;
+        for (let num of nums) {
+            maxNum = Math.max(maxNum, num);
+        }
+
+        console.log(`가장 큰 수는 ${maxNum}`);
+    }
+
+</script>
+
+</html>

@@ -15,7 +15,35 @@
   <script>
 
     $("#inputPrice").focus();
-    $("#purchaseBtn").click(function() {
+    
+    // $("#purchaseBtn").click(function() {
+    //   let inputPrice = $("#inputPrice").val();
+
+    //   $.ajax({
+    //     url: `http://localhost/qspurchase?inputPrice=${inputPrice}`,
+    //     data: {},
+    //     success: function(response) {
+    //       if (response == "구입불가") {
+    //         alert(response);
+    //       } else {
+    //         $("#resultArea").html(response);
+    //       }
+    //     }
+    //   })
+    // })
+
+     // 엔터 키를 눌렀을 때 처리
+     $("#inputPrice").keypress(function(event) {
+      if (event.which == 13) { // 13은 엔터 키의 keycode입니다.
+        purchase(); // purchase 함수 호출
+      }
+    });
+
+    // 구매 버튼 클릭 시 처리
+    $("#purchaseBtn").click(purchase);
+
+    // 구매 함수
+    function purchase() {
       let inputPrice = $("#inputPrice").val();
 
       $.ajax({
@@ -29,7 +57,8 @@
           }
         }
       })
-    })
+    }
+
 
   </script>
 </html>

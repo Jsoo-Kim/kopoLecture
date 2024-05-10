@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <div id="addArea">
+    </div>
+    <input type="button" id="addBtn" value="추가">
+    <input type="button" id="resultBtn" value="출력">
+    <div id="resultArea">
+    </div>
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script>
+    // 인풋창 추가
+    let idNum = 0;
+
+    $("#addBtn").click(function() {
+       $("#addArea").append(`<input type="text" id="num${idNum}">`);
+       idNum++;
+    });
+
+    // 결과 출력
+    $("#resultBtn").click(function() {
+        let result = 1;
+        for (let i = 0; i < idNum; i++) {
+            result *= Number($(`#num${i}`).val());
+        }
+        $("#resultArea").html(`${$("#resultArea").html()} 곱셈결과 : ${result}`);
+    });
+
+  </script>
+</html>

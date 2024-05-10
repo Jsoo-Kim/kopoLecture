@@ -12,20 +12,33 @@ app.get('/mid2', function(req, res) {
   res.sendfile("mid2.html")
 })
 
+app.get('/mid2_answer', function(req, res) {
+  res.sendfile("mid2_answer.html")
+})
+
 app.get('/mid3', function(req, res) {
   res.sendfile("mid3.html")
+})
+
+app.get('/mid3_answer', function(req, res) {
+  res.sendfile("mid3_answer.html")
 })
 
 app.get('/mid4', function(req, res) {
   res.sendfile("mid4.html")
 })
 
+app.get('/mid4_answer', function(req, res) {
+  res.sendfile("mid4_answer.html")
+})
 
+
+// 내 답안
 app.get('/bmi', function(req, res) {
   let height = parseFloat(req.query.height);
   let weight = parseFloat(req.query.weight);
-  calBmi = ( weight / Math.pow(height * 0.01, 2) ).toFixed(1);
-  result = "";
+  let calBmi = ( weight / Math.pow(height * 0.01, 2) ).toFixed(1);
+  let result = "";
 
   if (calBmi < 20) {
     result = "저체중";
@@ -41,7 +54,28 @@ app.get('/bmi', function(req, res) {
   res.send(response);
 })
 
+// 교수님 답안
+app.get('/calcBmi', function(req, res) {
+  let height = Number(req.query.height);
+  let weight = Number(req.query.weight);
+  let bmi = (weight / Math.pow(height / 100, 2)).toFixed(1);
+  let result = "";
 
+  if (bmi < 20) {
+    result = "저체중";
+  } else if (bmi < 25) {
+    result = "정상";
+  } else if (bmi < 30) {
+    result = "과체중";
+  } else {
+    result = "비만";
+  }
+
+  res.send({bmi : bmi, result : result});
+})
+
+
+// 내 답안
 let totalScores = [];
 app.get('/rank', function(req, res) {
   let korean = parseFloat(req.query.korean) * 1;
@@ -49,7 +83,6 @@ app.get('/rank', function(req, res) {
   let math = parseFloat(req.query.math) * 3;
   let totalScore  = korean + english + math;
   totalScores.push(totalScore);
-
   // console.log(totalScores);
 
   totalScores.sort(function(a, b) {
@@ -66,4 +99,32 @@ app.get('/rank', function(req, res) {
 
   let response = `석차 : ${yourRank} <br>`
   res.send(response)
+})
+
+// 교수님 답안
+let totalScoreArr = [];
+app.get('/rankCheck', function(req, res) {
+  let korean = Number(req.query.korean);
+  let english = Number(req.query.english);
+  let math = Number(req.query.math);
+  let totalScore  = korean + english*2 + math*3;
+  let rank = 1;
+
+  if (totalScoreArr.length == 0) {
+    totalScoreArr.push(totalScore);
+  } 
+  else if (totalScore < totalScoreArr[totalScoreArr.length - 1]) {
+    totalScoreArr.push(totalScore);
+    rank = totalScoreArr.length;
+  } 
+  else {
+    for (let i = 0; i < totalScoreArr.length; i++) {
+      if (totalScore >= totalScoreArr[i]) {
+        totalScoreArr.splice(i, 0, totalScore);
+        rank = i + 1;
+        break;
+      }
+    }
+  }
+  res.send({rank: rank})
 })
