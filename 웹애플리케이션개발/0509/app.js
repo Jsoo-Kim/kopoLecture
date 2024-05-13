@@ -1,4 +1,3 @@
-// const { log } = require('console');
 const express = require('express'); // Express(웹 애플리케이션을 쉽게 개발할 수 있도록 도와주는 Node.js용 웹 프레임워크) 모듈을 가져와 변수 express에 할당
 const http = require('http'); // HTTP 모듈(Node.js에서 HTTP 서버를 생성하는 기능을 제공)을 가져와 변수 http에 할당
 const app = express(); // express 함수를 호출하여 애플리케이션 객체를 생성하고, 이를 변수 app에 할당 => 이 애플리케이션 객체에 다양한 설정과 라우팅 규칙을 추가할 수 있음
@@ -20,8 +19,6 @@ function (err, rows, fields) {
 }
 );
 
-// console.log(1)
-
 
 // 라우터
 app.get('/', function (req, res) {
@@ -40,19 +37,19 @@ app.get('/newWrite', function (req, res) {
 app.get('/write', (req, res) => {
     let title = req.query.title;
     let content = req.query.text;
-  
+
     // 데이터베이스에 새로운 글 쓰기
     try {
-      connection.query(`INSERT INTO news (title, content) VALUES (?, ?)`, [title, content], (err, result) => {
-        if (err) {
-          console.error('MySQL 쿼리 오류:', err);
-          throw err;
-        }
-        console.log('DB에 저장 완료:', result);
-        res.send('글쓰기 성공');
-      });
+        connection.query(`INSERT INTO news (title, content) VALUES (?, ?)`, [title, content], function (err, result) {
+            if (err) {
+                console.error('MySQL 쿼리 오류:', err);
+                throw err;
+            }
+            console.log('DB에 저장 완료:', result);
+            res.send('글쓰기 성공');
+        });
     } catch (err) {
-      console.error('글쓰기 실패:', err);
-      res.status(500).send('글쓰기 실패');
+        console.error('글쓰기 실패:', err);
+        res.status(500).send('글쓰기 실패');
     }
-  });
+});
