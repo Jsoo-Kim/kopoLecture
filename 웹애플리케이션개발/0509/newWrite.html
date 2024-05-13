@@ -15,6 +15,14 @@
 <script>
 
     $("#title").focus();
+
+    // Enter 키 누르면 글쓰기 버튼을 클릭하도록 설정
+    $("#title, #text").keypress(function (event) {
+        if (event.which == 13) { // 13은 Enter 키의 keycode
+            $("#writeBtn").click();
+        }
+    });
+
     $("#writeBtn").click(function () {
         let title = $("#title").val();
         let text = $("#text").val();

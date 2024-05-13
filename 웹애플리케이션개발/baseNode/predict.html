@@ -53,30 +53,30 @@
                         <br>
                         <!-- Add the image here -->
                         <div id="imageContainer">
-                            <label> {특성} 값 입력 시 {라벨} 값을 예측합니다. </label>
+                            <label> 토요일 제주도 도로의 차량 평균속도를 예측합니다. </label>
+                            <img src="/images/jeju_road.jpg" alt="jeju_road.jpg" class="img-fluid">
                             <!-- <label> ['input_road_rating', 'input_maximum_speed_limit', 'input_weight_restricted']</label> -->
-                            <p>
-                                1. input_road_rating : 0(103) / 4(106) / 5(107) <br>
-                                2. input_maximum_speed_limit : 30 / 40 / 50 / 60 / 70 / 80 <br>
-                                3. input_weight_restricted : 0(제한x) / 1(32400) / 5(43200) / 6(50000)
+                            <p> <br>
+                                1. road_rating : 0(일반국도) / 4(지방도) / 5(시도·군도) <br>
+                                2. maximum_speed_limit : 30 / 40 / 50 / 60 / 70 / 80 (km/h) <br>
+                                3. weight_restricted : 0(제한x) / 1(32400) / 5(43200) / 6(50000) (kg)
                             </p>
-                            <!-- <img src="/images/sample_anal_page.png" alt="slab_predict.png" class="img-fluid"> -->
                         </div>
                         <br>
                         <form>
 
                             <div class="form-group">
-                                <label for="input1">입력변수1 </label>
+                                <label for="input1"> 1. road_rating </label>
                                 <input type="text" class="form-control" id="features1" placeholder="값을 입력하세요">
                             </div>
 
                             <div class="form-group">
-                                <label for="input2">입력변수2</label>
+                                <label for="input2">2. maximum_speed_limit</label>
                                 <input type="text" class="form-control" id="features2" placeholder="값을 입력하세요">
                             </div>
 
                             <div class="form-group">
-                                <label for="input3">입력변수3</label>
+                                <label for="input3">3. weight_restricted</label>
                                 <input type="text" class="form-control" id="features3" placeholder="값을 입력하세요">
                             </div>
 
@@ -174,7 +174,10 @@
                 success: function (data) {
                     console.log(data);
                     // $('#input3').text(${data.result});
-                    $("#baseResult").append(`<div> road_rating: ${selectedFeat1} / maximum_speed_limit: ${selectedFeat2} / weight_restricted: ${selectedFeat3} <br> 결과: ${data.result}</div>`);
+                    $("#baseResult").append(`<div> road_rating: ${selectedFeat1} <br>
+                         maximum_speed_limit: ${selectedFeat2} <br>
+                         weight_restricted: ${selectedFeat3} <br> 
+                         결과: ${data.result}</div>`);
                 },
                 error: function (xhr, errorThrown) {
                     // HTTPException이 발생했을 때의 동작
