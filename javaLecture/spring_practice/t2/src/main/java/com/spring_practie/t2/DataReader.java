@@ -23,7 +23,7 @@ public class DataReader {
 	}
 	
 	public DataReader(String databaseFileName, String dbTableName) {
-		this.dbFileName = databaseFileName;
+		this.dbFileName = databaseFileName; // sqlite가 위치한 파일
 		this.dbTableName = dbTableName;
 	}
 	
@@ -56,26 +56,32 @@ public class DataReader {
 			throw new Exception("DB is not open");
 		}
 		// CREATE TABLE students(idx INT PRIMARY KEY, name TEXT, score REAL);
-		String query = "CREATE TABLE " + this.dbTableName + " (idx INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, mid_score REAL, final_score REAL);";
+		String query = "CREATE TABLE " + this.dbTableName + " (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, score INT);";
 		Statement statement = this.connection.createStatement();
 		int result = statement.executeUpdate(query);
 		statement.close();
 		return result;
 	}
 	
-	public int insertData() throws SQLException {
-		Random random = new Random();
-		// for문으로 한 번에 넣어도 됨!
-		String query = "";
-		for (int i = 1; i <= 10; i++) {			
-			Integer midScore = random.nextInt(100) + 1;
-			Integer finalScore = random.nextInt(100) + 1;
-			// Values('학생1' <= 이런 식으로 숫자까지 나온 다음 '이걸 닫아줘야 함!!
-			query += "INSERT INTO " + this.dbTableName + " (name, mid_score, final_score) Values('학생" + String.valueOf(i) + "', " + midScore + ", " + finalScore + ");";
-		}
-		Statement statement = this.connection.createStatement();
-		int result = statement.executeUpdate(query);
-		statement.close();
+	// 객체로 넘겨받자!
+	public int insertData(Student student) throws SQLException {
+//		Random random = new Random();
+//		// for문으로 한 번에 넣어도 됨!
+//		String query = "";
+//		for (int i = 1; i <= 10; i++) {			
+//			Integer midScore = random.nextInt(100) + 1;
+//			Integer finalScore = random.nextInt(100) + 1;
+//			// 주의: Values('학생1' <= 이런 식으로 숫자까지 나온 다음 '이걸 닫아줘야 함!! 따옴표가 문자열에 들어가야 함!!
+//			query += "INSERT INTO " + this.dbTableName + " (name, mid_score, final_score) Values('학생" + String.valueOf(i) + "', " + midScore + ", " + finalScore + ");";
+//		}
+		
+		// Statement 말고 PreparedStatement를 써서 완성된 쿼리를 안 써 줘도 됨! ?로 비워두고 set 해 주기!
+		String query = "INSERT INTO " + this.dbTableName + "(name, score) VALUES (?, ?)"; 
+		PreparedStatement preparedStatement = this.connection.prepareStatement(query);
+	    preparedStatement.setString(1, student.name);
+	    preparedStatement.setInt(2, student.score);
+		int result = preparedStatement.executeUpdate();
+		preparedStatement.close();
 		return result;
 	}
 	
@@ -96,6 +102,14 @@ public class DataReader {
 	
 	public int deleteTable() throws SQLException { // 테이블 삭제 및 시퀀스인덱스(AutoIncrement) 초기화
 		String query = "DELETE FROM " + dbTableName + ";\n" + "UPDATE SQLITE_SEQUENCE SET seq = 0 WHERE name = " + dbTableName + ";";
+		Statement statement = this.connection.createStatement();
+		int result = statement.executeUpdate(query);
+		statement.close();
+		return result;
+	}
+	
+	public int dropTable() throws SQLException {
+		String query = "DROP TABLE " + dbTableName;
 		Statement statement = this.connection.createStatement();
 		int result = statement.executeUpdate(query);
 		statement.close();
