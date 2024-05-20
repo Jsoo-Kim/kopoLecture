@@ -4,8 +4,8 @@ public class MainClass {
 	static long[] memo;
 	
 	public static void main(String[] args) {
-//		memo = new long[101];
-//		System.out.println(fibonacci(100));
+		memo = new long[101];
+		System.out.println(fibonacci(100));
 		
 		System.out.println(mySum(1));
 		

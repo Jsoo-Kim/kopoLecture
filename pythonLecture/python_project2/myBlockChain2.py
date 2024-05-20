@@ -21,14 +21,14 @@ from multiprocessing import Process, Lock # for using Lock method(acquire(), rel
 # for Put Lock objects into variables(lock)
 lock = Lock()
 
-PORT_NUMBER = 8666
+PORT_NUMBER = 8667
 g_txFileName = "txData.csv"
 g_bcFileName = "blockchain.csv"
 g_nodelstFileName = "nodelst.csv"
 g_receiveNewBlock = "/node/receiveNewBlock"
 g_difficulty = 5 # 난이도! 앞에 0이 5개인 값으로 설정한 것?
 g_maximumTry = 100
-g_nodeList = {'127.0.0.1':'8668'} # trusted server list, should be checked manually
+g_nodeList = {'127.0.0.1':'8666'} # trusted server list, should be checked manually
 
 
 class Block:
@@ -645,7 +645,7 @@ def initSvr():
     # if we don't have, let's request node list
     if last_line_number == 0:
         # get nodes...
-        for key, value in g_nodeList.items():
+        for key, value in g_nodeList.items(): # key: ip, value: port
             URL = 'http://'+key+':'+value+'/node/getNode'
             try:
                 res = requests.get(URL)
@@ -662,7 +662,7 @@ def initSvr():
     blockchainList=[]
     if last_line_number == 0:
         # get Block Data...
-        for key, value in g_nodeList.items():
+        for key, value in g_nodeList.items(): # key: ip, value: port
             URL = 'http://'+key+':'+value+'/block/getBlockData'
             try:
                 res = requests.get(URL)

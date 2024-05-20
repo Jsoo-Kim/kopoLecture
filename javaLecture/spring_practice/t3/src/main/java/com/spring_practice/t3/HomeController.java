@@ -97,7 +97,9 @@ public class HomeController {
 	
 	// 결국 localhost:8088/t2/insertAction?t1="이름"&s1=123 이렇게 쿼리스트링으로 주는 것! 폼에 굳이 입력 안 해도 똑같이 작동함
 	@RequestMapping(value = "/insertAction", method = RequestMethod.GET)
-	public String insertAction(Locale locale, Model model, @RequestParam("t1") String name, @RequestParam("s1") int score) throws SQLException {
+	public String insertAction(Locale locale, Model model, 
+			@RequestParam("t1") String name, 
+			@RequestParam("s1") int score) throws SQLException {
 		
 		dataReader.open();
 		

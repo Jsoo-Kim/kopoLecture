@@ -1,3 +1,4 @@
+package 알고리즘;
 class PermutationEx {
 
 	public static void main(String args[]) {

@@ -1,4 +1,4 @@
-package com.spring_practice.productregistration;
+package com.spring_practice.productregistration.model;
 
 public class Product {
     private String productName;
@@ -6,7 +6,6 @@ public class Product {
     private int stock;
     private String imageUrl;
 
-    // 생성자, getter 및 setter 메서드
     public Product() {
     }
 

@@ -21,4 +21,4 @@ input {
 		<input type="submit" value="입력 완료" />
 	</form>
 </body>
-</html>s
+</html>

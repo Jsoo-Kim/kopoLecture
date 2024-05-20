@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5a667d07-639b-4f7e-8cee-eca1522a023d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/python_project2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myBlockChain2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../javaLecture/java_practice/0412 dfs bfs/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../javaLecture/java_practice/0412 dfs bfs/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../javaLecture/java_practice/Recursive/src/MainClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../javaLecture/java_practice/Recursive/src/MainClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../javaLecture/java_practice/Wonyong/src/PermutationEx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../python_project/blockchain.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../python_project/blockchain.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../python_project/myBlockChain.py" beforeDir="false" afterPath="$PROJECT_DIR$/../python_project/myBlockChain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../python_project/txData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../python_project/txData.csv" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2gaAN1TRTnfNfeN8vPEPatKZ4fH" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.myBlockChain2.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-09665e90c3a7-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.15026.15" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5a667d07-639b-4f7e-8cee-eca1522a023d" name="Changes" comment="" />
+      <created>1715925270378</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1715925270378</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/myBlockChain2.py</url>
+          <line>854</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

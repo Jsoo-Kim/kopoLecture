@@ -30,7 +30,6 @@ public class DataReader {
 		this.dbTableName = dbTableName;
 	}
 
-	
 	public boolean open() {
 		try {
 			this.connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
@@ -41,7 +40,6 @@ public class DataReader {
 		return true;
 	}
 
-	
 	public boolean close() {
 		if (this.connection == null) {
 			return true;
@@ -54,7 +52,6 @@ public class DataReader {
 		}
 		return true;
 	}
-	
 
 //	public int createTable() throws SQLException {
 //		if (this.connection == null) {
@@ -67,33 +64,36 @@ public class DataReader {
 //		statement.close();
 //		return result;
 //	}
-	
+
 	public int createTable() throws SQLException {
-	    if (this.connection == null) {
-	        throw new SQLException("DB is not open");
-	    }
-	    String query = "CREATE SEQUENCE sequence "
-	                 + "START WITH 1 "
-	                 + "INCREMENT BY 1 "
-	                 + "NOMAXVALUE";
+		// 데이터베이스 연결이 열려 있는지 확인. 연결이 닫혀 있으면 SQLException을 던짐
+		if (this.connection == null) {
+			throw new SQLException("DB is not open");
+		}
+		// 시퀀스를 생성하는 SQL 쿼리 문자열을 정의
+		String query = "CREATE SEQUENCE sequence " + "START WITH 1 " + "INCREMENT BY 1 " + "NOMAXVALUE";
 
-	    Statement sequenceStatement = this.connection.createStatement();
-	    sequenceStatement.executeUpdate(query);
-	    sequenceStatement.close();
+		// 시퀀스를 생성하기 위해 Statement 객체를 생성하고, 쿼리를 실행
+		Statement sequenceStatement = this.connection.createStatement();
+		sequenceStatement.executeUpdate(query);
+		sequenceStatement.close();
 
-	    query = "CREATE TABLE " + this.dbTableName
-	            + " (id NUMBER DEFAULT sequence.NEXTVAL PRIMARY KEY, "
-	            + " name VARCHAR2(100), "
-	            + " score NUMBER)";
-	    
-	    Statement tableStatement = this.connection.createStatement();
-	    int result = tableStatement.executeUpdate(query);
-	    tableStatement.close();
-	    
-	    return result;
+		// 테이블을 생성하는 SQL 쿼리 문자열을 정의
+		query = "CREATE TABLE " + this.dbTableName 
+				+ " (id NUMBER DEFAULT sequence.NEXTVAL PRIMARY KEY, "
+				+ " name VARCHAR2(100), " 
+				+ " score NUMBER)";
+
+		// 테이블을 생성하기 위해 Statement 객체를 생성하고, 쿼리를 실행
+		Statement tableStatement = this.connection.createStatement();
+		// 테이블 생성 결과를 정수형 변수로 받음
+		int result = tableStatement.executeUpdate(query);
+		// 테이블 생성이 끝나면 Statement 객체를 닫음
+		tableStatement.close();
+
+		return result;
 	}
 
-	
 	public int insertData(String name, int score) throws SQLException {
 //		Random random = new Random();
 //		String query = "INSERT INTO " + this.dbTableName + " (id, name, mid_score, final_score) VALUES (?, ?, ?, ?)";
@@ -117,7 +117,6 @@ public class DataReader {
 		return result;
 	}
 
-	
 	public boolean selectData() throws SQLException {
 		boolean result = false;
 		String query = "SELECT * FROM " + this.dbTableName + " WHERE id = ?";
@@ -132,7 +131,6 @@ public class DataReader {
 		preparedStatement.close();
 		return result;
 	}
-	
 
 	public int deleteTable() throws SQLException {
 		String query = "DELETE FROM " + dbTableName;
@@ -142,7 +140,6 @@ public class DataReader {
 		return result;
 	}
 
-	
 	public int dropTable() throws SQLException {
 		String query = "DROP TABLE " + dbTableName;
 		Statement statement = this.connection.createStatement();
