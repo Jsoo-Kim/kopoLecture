@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>newsWrite</title>
+</head>
+
+<body>
+    제목 <input type="text" id="title"></input><br>
+    내용 <textarea id="content" rows="8" cols="30"></textarea><br>
+    <input type="button" value="입력" id="insertBtn">
+    <input type="button" value="목록으로" id="goToNewsListPageBtn">
+</body>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+
+    $("#title").focus();
+
+    // Enter 키 누르면 글쓰기 버튼을 클릭하도록 설정
+    $("#title, #content").keypress(function (event) {
+        if (event.which == 13) { // 13은 Enter 키의 keycode
+            $("#insertBtn").click();
+        }
+    });
+
+    $("#insertBtn").click(function () {
+        let title = $("#title").val();
+        let content = $("#content").val();
+
+        $.ajax({
+            url: `http://localhost/write`,
+            data: {
+                title: title,
+                content: content,
+            },
+            type: 'POST',
+            success: function (response) {
+                console.log(response);
+                alert(response);
+            }
+        })
+
+    })
+
+    $("#goToNewsListPageBtn").click(function() {
+        location.href = "/newsList";
+    })
+
+</script>
+
+</html>
