@@ -11,6 +11,7 @@
                 margin: 20px auto;
                 border-radius: 10px;
                 background: #f1f1f1;
+                text-align: center; <!-- 추가 -->
             }
             ul, li {
                 list-style-type: none;
@@ -20,7 +21,7 @@
             ul {
                 display: flex;
                 gap: 10px;
-                justify-content: left;
+                justify-content: center; <!-- 수정 -->
             }
             li {
                 display: inline-block;
@@ -63,26 +64,10 @@
                         <a href="student_form">성적 입력</a>
                     </li>
                     <li>
-                        <a href="#">목록</a>
+                        <a href="detail_list">목록</a>
                     </li>
                 </ul>
             </nav>
-            <table>
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>이름</th>
-                        <th>중간성적</th>
-                        <th>기말성적</th>
-                        <th>총점</th>
-                        <th>평균</th>
-                        <th>생성일</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${list }
-                </tbody>
-            </table>
         </div>
     </body>
 </html>

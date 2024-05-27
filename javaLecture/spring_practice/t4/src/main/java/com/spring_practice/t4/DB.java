@@ -325,6 +325,7 @@ public class DB<T> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("@@@@@@@@@"+list.size());
         this.close();
 
         return list;
@@ -380,4 +381,42 @@ public class DB<T> {
 
         return resultData;
     }
+
+    public Student detailStudent(int studentId) {
+    	Student student = null;
+    	
+    	this.open();
+    	try {
+    		
+            // 학생 정보 조회 쿼리
+            String queryString = "SELECT * FROM students WHERE id=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(queryString);
+            preparedStatement.setInt(1, studentId);
+            
+
+            // 쿼리 실행 결과를 학생 객체에 매핑
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                student = new Student();
+                student.setId(resultSet.getInt("id"));
+                student.setName(resultSet.getString("name"));
+                student.setMiddleScore(resultSet.getInt("middleScore"));
+                student.setFinalScore(resultSet.getInt("finalScore"));
+                student.setTotalScore(resultSet.getInt("totalScore"));
+                student.setAvgScore(resultSet.getDouble("avgScore"));
+                student.setCreated(resultSet.getString("created"));
+            }
+            
+            // 리소스 해제
+            resultSet.close();
+    		preparedStatement.close();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	this.close();
+    	
+    	return student;
+    }
+    
+    
 }

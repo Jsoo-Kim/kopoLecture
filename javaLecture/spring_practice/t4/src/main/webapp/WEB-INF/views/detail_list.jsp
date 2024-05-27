@@ -11,6 +11,7 @@
                 margin: 20px auto;
                 border-radius: 10px;
                 background: #f1f1f1;
+                text-align: center; <!-- 추가 -->
             }
             ul, li {
                 list-style-type: none;
@@ -20,7 +21,7 @@
             ul {
                 display: flex;
                 gap: 10px;
-                justify-content: left;
+                justify-content: center; <!-- 수정 -->
             }
             li {
                 display: inline-block;
@@ -38,6 +39,24 @@
             li:hover a {
                 color: #ffffff;
             }
+            a:hover {
+                color: #ffffff;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 50px;
+            }
+            th {
+                background: #555;
+                color: #fff;
+                padding: 5px 0px;
+                text-align: center;
+            }
+            td {
+                padding: 5px 0px;
+                text-align: center;
+            }
         </style>
     </head>
     <body>
@@ -48,10 +67,28 @@
                         <a href="student_form">성적 입력</a>
                     </li>
                     <li>
-                        <a href="#">다른 메뉴</a>
+                        <a href="/t4/">홈</a>
                     </li>
                 </ul>
             </nav>
+            <table>
+                <thead>
+                    <tr>
+                        <th>석차</th>
+                        <th>id</th>
+                        <th>이름</th>
+                        <th>중간성적</th>
+                        <th>기말성적</th>
+                        <th>총점</th>
+                        <th>평균</th>
+                        <th>생성일</th>
+                        <th>수정</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${list }
+                </tbody>
+            </table>
         </div>
     </body>
 </html>
