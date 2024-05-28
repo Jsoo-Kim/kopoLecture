@@ -1,4 +1,4 @@
-package com.spring_practice.t4;
+package com.spring_practice.t5;
 
 public class Student {
 

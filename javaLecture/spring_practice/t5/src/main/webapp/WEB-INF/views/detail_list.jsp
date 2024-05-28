@@ -67,7 +67,7 @@
                         <a href="student_form">성적 입력</a>
                     </li>
                     <li>
-                        <a href="/t4/">홈</a>
+                        <a href="/t5/">홈</a>
                     </li>
                 </ul>
             </nav>

@@ -54,16 +54,14 @@
     </head>
     <body>
         <div class="wrap">
-            <h1>Update</h1>
-            <form action="update_action">
-                <input type="hidden" name="id" value="${student.id}" />
-                <input type="text" placeholder="이름" name="name" value="${student.name}" />
-                <input type="number" placeholder="중간 성적" name="middle_score" value="${student.middleScore}" />
-                <input type="number" placeholder="기말 성적" name="final_score" value="${student.finalScore}" />
-                <input type="text" placeholder="생성일" name="created" value="${student.created}" />
-                <input type="submit" value="수정 완료" />
+            <h1>Insert</h1>
+            <form action="insert_action">
+                <input type="text" placeholder="이름" name="name" />
+                <input type="number" placeholder="중간 성적" name="middle_score" />
+                <input type="number" placeholder="기말 성적" name="final_score" />
+                <input type="submit" value="입력 완료" />
             </form>
-            <p><a href="detail_list">목록</a></p>
+            <p><a href="/t5/">홈</a></p>
             <div>${message}</div>
         </div>
     </body>

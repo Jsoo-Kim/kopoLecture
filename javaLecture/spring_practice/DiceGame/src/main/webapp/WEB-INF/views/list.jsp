@@ -64,28 +64,25 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="student_form">성적 입력</a>
+                        <a href="play">주사위 게임 실행</a>
                     </li>
                     <li>
-                        <a href="/t4/">홈</a>
+                        <a href="/DiceGame">홈</a>
                     </li>
                 </ul>
             </nav>
             <table>
                 <thead>
                     <tr>
-                        <th>석차</th>
-                        <th>id</th>
-                        <th>이름</th>
-                        <th>중간성적</th>
-                        <th>기말성적</th>
-                        <th>총점</th>
-                        <th>평균</th>
+                        <th>idx</th>
+                        <th>사용자</th>
+                        <th>컴퓨터</th>
+                        <th>결과</th>
                         <th>생성일</th>
                     </tr>
                 </thead>
                 <tbody>
-                    ${list }
+      				${list }
                 </tbody>
             </table>
         </div>

@@ -1,5 +1,6 @@
-package com.spring_practice.t4;
+package com.spring_practice.t5;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +24,6 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	DB db = new DB<Student>("d:\\gitMaster\\kopoLecture\\javaLecture\\spring_practice\\students.db", "students");
-//	DB db = new DB<Student>("/Users/kimjisoo/Desktop/Jisoo/스마트금융/kopoLecture/javaLecture/spring_practice/students.db", "students");
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -32,7 +32,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/detail_list", method = RequestMethod.GET)
 	public String detailList(Locale locale, Model model) {
-		ArrayList<Student> students = db.selectData(new Student());
+		ArrayList<Student> students = db.selectData();
 //		System.out.println(students.toString());
 
 		// 람다는 스프링 버전 3.2.x 이상에 JDK 8 이상부터 지원!
@@ -89,7 +89,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createTable(Locale locale, Model model) {
-		db.createTable(new Student());
+		db.createTable();
 		
 		model.addAttribute("message", "테이블이 생성되었습니다.");
 		return "message";
@@ -112,7 +112,11 @@ public class HomeController {
 //		String strNowDate = simpleDateFormat.format(nowDate);
 		String now = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date());
 		
-		db.insertData(new Student(name, middleScore, finalScore, now));
+		try {
+			db.insertData(new Student(name, middleScore, finalScore, now));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		model.addAttribute("message", "데이터가 입력되었습니다.");
 		return "student_form";
 	}
@@ -134,7 +138,11 @@ public class HomeController {
 			@RequestParam("final_score") int finalScore,
 			@RequestParam("created") String created) {
 //		Student student = (Student) db.detailStudent(id); // DB 2번 타게 됨 
-		db.updateData(new Student(id, name, middleScore, finalScore, created));
+		try {
+			db.updateData(new Student(id, name, middleScore, finalScore, created));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		model.addAttribute("message", "데이터가 수정되었습니다.");
 		return "redirect:/detail_list";
 	}
