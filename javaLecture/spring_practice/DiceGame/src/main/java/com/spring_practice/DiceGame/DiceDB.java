@@ -10,14 +10,16 @@ import java.util.ArrayList;
 
 import org.sqlite.SQLiteConfig;
 
-public class DB {
+
+public class DiceDB {
 
 	String dbFileName = "";
 
 	Connection connection;
 
-	DB() {
-		this.dbFileName = "d:\\gitMaster\\kopoLecture\\javaLecture\\spring_practice\\dice.db";
+	DiceDB() {
+//		this.dbFileName = "d:\\gitMaster\\kopoLecture\\javaLecture\\spring_practice\\dice.db";
+		this.dbFileName = "/Users/kimjisoo/Desktop/Jisoo/kopo/kopoLecture/javaLecture/spring_practice/dice.db";
 	}
 
 	private void open() {
@@ -96,6 +98,72 @@ public class DB {
 		return list;
 	}
 	
+	public void updateData(Dice dice) {
+		String query = "UPDATE history"
+				+ " SET user=?, computer=?, result=?, created=?" 
+				+ " WHERE idx=?";
 
+		this.open();
+		try {
+			PreparedStatement preparedStatement = this.connection.prepareStatement(query);
+			preparedStatement.setInt(1, dice.user);
+			preparedStatement.setInt(2, dice.computer);
+			preparedStatement.setString(3, dice.result);
+			preparedStatement.setString(4, dice.created);
+			preparedStatement.setInt(5, dice.idx);
+			preparedStatement.execute();
+			preparedStatement.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		this.close();
+	}
+	
+	public Dice detailData(Dice dice) {
+		String query = "SELECT * FROM history WHERE idx=?";
+
+		this.open();
+		try {
+			PreparedStatement preparedStatement = this.connection.prepareStatement(query);
+			preparedStatement.setInt(1, dice.idx);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				dice.idx = resultSet.getInt("idx");
+				dice.user = resultSet.getInt("user");
+				dice.computer = resultSet.getInt("computer");
+				dice.result = resultSet.getString("result");
+				dice.created = resultSet.getString("created");
+			}
+			resultSet.close();
+			preparedStatement.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		this.close();
+
+		return dice;
+	}
+	
+	public boolean deleteData(Dice dice) {
+		String query = "DELETE FROM history WHERE idx=?";
+
+		this.open();
+		int result = 0;
+		try {
+			PreparedStatement preparedStatement = this.connection.prepareStatement(query);
+			preparedStatement.setInt(1, dice.idx);
+			result = preparedStatement.executeUpdate();
+			System.out.println("delete result: " + result);
+			preparedStatement.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		this.close();
+
+		if (result > 0) {
+			return true;
+		}
+		return false;
+	}
 	
 }

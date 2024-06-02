@@ -64,10 +64,13 @@
             <nav>
                 <ul>
                     <li>
+                        <a href="userList">회원목록</a>
+                    </li>
+                    <li>
                         <a href="play">주사위 게임 실행</a>
                     </li>
                     <li>
-                        <a href="/DiceGame">홈</a>
+                        <a href="signup_form">회원가입</a>
                     </li>
                 </ul>
             </nav>
@@ -79,6 +82,8 @@
                         <th>컴퓨터</th>
                         <th>결과</th>
                         <th>생성일</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>

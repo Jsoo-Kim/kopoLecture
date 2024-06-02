@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <style>
             .wrap {
-                width: 500px;
+                width: 800px;
                 padding: 10px;
                 margin: 20px auto;
                 border-radius: 10px;
@@ -39,6 +39,9 @@
             li:hover a {
                 color: #ffffff;
             }
+            a:hover {
+                color: #ffffff;
+            }
             table {
                 width: 100%;
                 border-collapse: collapse;
@@ -61,13 +64,26 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="student_form">성적 입력</a>
-                    </li>
-                    <li>
-                        <a href="detail_list">목록</a>
+                        <a href="/DiceGame">홈</a>
                     </li>
                 </ul>
             </nav>
+            <table>
+                <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>아이디</th>
+                        <th>패스워드</th>
+                        <th>성별</th>
+                        <th>주소</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+      				${list }
+                </tbody>
+            </table>
         </div>
     </body>
 </html>
