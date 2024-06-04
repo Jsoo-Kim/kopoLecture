@@ -34,6 +34,11 @@ public class User {
 		this.address = address;
 		this.created = created;
 	}
+	
+	public User(String userId, String userPw) {
+		this.userId = userId;
+		this.userPw = userPw;
+	}
 
 	public int getId() {
 		return id;

@@ -19,8 +19,8 @@ public class UserDB {
 	Connection connection;
 
 	UserDB() {
-//		this.dbFileName = "d:\\gitMaster\\kopoLecture\\javaLecture\\spring_practice\\dice.db";
-		this.dbFileName = "/Users/kimjisoo/Desktop/Jisoo/kopo/kopoLecture/javaLecture/spring_practice/users.db";
+		this.dbFileName = "d:\\gitMaster\\kopoLecture\\javaLecture\\spring_practice\\users.db";
+//		this.dbFileName = "/Users/kimjisoo/Desktop/Jisoo/kopo/kopoLecture/javaLecture/spring_practice/users.db";
 	}
 
 	private void open() {
@@ -173,5 +173,38 @@ public class UserDB {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean signin(User user) {
+		String query = "SELECT * FROM users WHERE userId=? and userPw=?";
+		boolean isSuccess = false;
+
+		this.open();
+		try {
+			PreparedStatement preparedStatement = this.connection.prepareStatement(query);
+			preparedStatement.setString(1, user.userId);
+			preparedStatement.setString(2, user.userPw);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) { // 조회된 결과가 있을 경우
+		        String storedPassword = resultSet.getString("userPw"); 
+		        String inputPassword = user.userPw; 
+
+		        if (storedPassword.equals(inputPassword)) { // 비밀번호 일치
+		            System.out.println("로그인 성공 : " + user.userId);
+		            isSuccess = true;
+		        } else { // 비밀번호 불일치
+		            System.out.println("비밀번호가 일치하지 않습니다.");
+		        }
+		    } else {   // 조회된 결과가 없을 경우 (해당하는 사용자가 없음)
+		        System.out.println("해당하는 사용자가 없습니다.");
+		    }
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		} finally {
+		    this.close(); 
+		}
+		
+		return isSuccess;
 	}
 }

@@ -1,9 +1,13 @@
 package com.spring_practice.DiceGame;
 
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +25,12 @@ public class UserController {
 	UserDB userDB = new UserDB();
 	
 	@RequestMapping(value = "/userList", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, Model model, HttpSession session) {
+		
+		if (session.getAttribute("is_login") == null || !(boolean)session.getAttribute("is_login")) {
+			return "redirect:/signup_form";	
+		} 
+		
 		ArrayList<User> list = userDB.selectData();
 		String htmlText = "";
 		for (int i = 0; i < list.size(); i++) {
@@ -61,22 +70,53 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/signup_form", method = RequestMethod.GET)
-	public String play(Locale locale, Model model) {
+	public String signup_form(Locale locale, Model model) {
 		return "signup_form";
 	}
 
-	@RequestMapping(value = "/signup", method = RequestMethod.GET)
-	public String playAction(Locale locale, Model model,
-			@RequestParam("name") String name,
-			@RequestParam("userId") String userId,
-			@RequestParam("userPw") String userPw,
-			@RequestParam("gender") String gender,
-			@RequestParam("address") String address) {
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	public String signup(Locale locale, Model model, ServletRequest request) {
+		// spring의 한글 깨짐 현상 방지하려면 이렇게 해야 함! 스프링 부트에는 없는 현상
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		String name = request.getParameter("name");
+		String userId = request.getParameter("userId");
+		String userPw = request.getParameter("userPw");
+		String gender = request.getParameter("gender");
+		String address = request.getParameter("address");
+		userPw = Sha256EncryptUtil.shaEncoder(userPw);
+		
 		String now = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date());
 		User user = new User(name, userId, userPw, gender, address, now);
 		userDB.insertData(user);
 		model.addAttribute("message", "회원가입이 완료되었습니다.");
 		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/signin_form", method = RequestMethod.GET)
+	public String signin_form(Locale locale, Model model) {
+		return "signin_form";
+	}
+	
+	@RequestMapping(value = "/signin", method = RequestMethod.GET)
+	public String signin(Locale locale, Model model, HttpSession session,
+			@RequestParam("userId") String userId,
+			@RequestParam("userPw") String userPw) {
+		
+		userPw = Sha256EncryptUtil.shaEncoder(userPw);
+		boolean result = userDB.signin(new User(userId, userPw));
+		if (result) {
+			model.addAttribute("message", "로그인에 성공했습니다.");
+			session.setAttribute("is_login", true);  // 세션에 'key, value'를 'is_login, true' 로 저장
+			return "redirect:/";
+		} else {
+			model.addAttribute("message", "로그인에 실패했습니다.");
+			session.setAttribute("is_login", false);
+			return "signin_form";
+		}		
 	}
 	
 	// 수정, 삭제는 Dice Game 목록 부분에 구현했습니다 

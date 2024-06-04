@@ -72,6 +72,9 @@
                     <li>
                         <a href="signup_form">회원가입</a>
                     </li>
+                    <li>
+                        <a href="signin_form">로그인</a>
+                    </li>
                 </ul>
             </nav>
             <table>
