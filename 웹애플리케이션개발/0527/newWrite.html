@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>function</title>
+  </head>
+  <body>
+    제목
+    <input type="title" id="title"><br>
+    내용
+    <textarea id="content" rows="8" cols="30"></textarea><br>
+    <input type="button" id="inputBtn" value="입력">
+    <input type="button" id="goToNewsListPageBtn" value="목록">
+    </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script>
+    $("#inputBtn").click(function(){
+
+      let title = $("#title").val();
+      let content = $("#content").val();
+
+      $.ajax({
+        url: `http://localhost/Write`,
+        data: {
+          title: title,
+          content: content
+        },
+        type: 'POST',
+        success:function(response){
+          console.log(response);
+        }
+    });
+  });
+  $("#goToNewsListPageBtn").click(function(){
+    location.href = "/newsList";
+});
+</script>
+</html>

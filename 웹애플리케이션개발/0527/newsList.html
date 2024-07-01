@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>newsListEx</title>
+</head>
+<style>
+</style>
+<body>
+  <div id="newsListArea">
+  </div>
+  <input type="button" value="글쓰기" id="newsWriteBtn">
+</body>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    // 뉴스 목록 가져오기
+    $.ajax({
+      url: `http://localhost/List`,
+      success: function(res) {
+        for (let i = 0; i < res.length; i++) {
+          // 뉴스 항목에 고유 ID를 부여하여 HTML 요소를 생성
+          $("#newsListArea").append(`
+            <div id="news${res[i].no}">
+              제목: ${res[i].title} / 내용: ${res[i].content}
+              <input type="button" value="삭제" onclick='deleteNews(${res[i].no})'>
+              <input type="button" value="수정" onclick='updateNews(${res[i].no})'>
+            </div>
+          `);
+        }
+      }
+    });
+    // 뉴스 삭제 함수
+    function deleteNews(no) {
+      $.ajax({
+        url: `http://localhost/deleteNews`,
+        type: "DELETE",
+        data: { deleteNo: no },
+        success: function(res) {
+          console.log(res);
+          if(res.affectedRows==1) {
+          // 삭제 요청 성공 후 해당 뉴스 항목 제거
+          $(`#news${no}`).remove();
+        }
+        }
+      });
+    }
+
+    function updateNews(no) {
+        location.href = `/newsUpdate?${no}`;
+    }
+
+    // 글쓰기 버튼 클릭 이벤트
+    $("#newsWriteBtn").click(function() {
+      location.href = "/newWrite";
+    });
+
+</script>
+</html>

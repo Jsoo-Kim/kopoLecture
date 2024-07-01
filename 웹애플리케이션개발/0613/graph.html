@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Real-Time Google Charts</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {packages: ['corechart', 'line']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        let data, chart, options;
+
+        function getRandomData() {
+            const rows = [];
+            for (let i = 0; i <= 10; i++) {
+                rows.push([i, Math.random() * 10, Math.random() * 10, Math.random() * 10]);
+            }
+            return rows;
+        }
+
+        function drawChart() {
+            data = new google.visualization.DataTable();
+            data.addColumn('number', 'X');
+            data.addColumn('number', 'Dogs');
+            data.addColumn('number', 'Cats');
+            data.addColumn('number', 'Cows');
+
+            data.addRows(getRandomData());
+
+            options = {
+                hAxis: {
+                    title: 'Time',
+                    gridlines: { count: 11 },
+                    ticks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                },
+                vAxis: {
+                    title: 'Value'
+                },
+                series: {
+                    0: { lineWidth: 2 },
+                    1: { lineWidth: 2, curveType: 'function' }, // Cats
+                    2: { lineWidth: 2 }
+                }
+            };
+
+            chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+
+            setInterval(updateChart, 1000);
+        }
+
+        function updateChart() {
+            data.removeRows(0, data.getNumberOfRows());
+            data.addRows(getRandomData());
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <div id="chart_div"></div>
+</body>
+</html>

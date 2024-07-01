@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>time</title>
+</head>
+<body>
+    <input type="text" id="num">
+    <input type="button" id="multipleIncrease" value="배수증가">
+    <input type="button" id="startTimer" value="타이머시작">
+    <input type="button" id="stopTimer" value="타이머종료">
+    <span id="timerResult"></span>
+    <br>
+    <div id="multipleResult"></div>
+</body>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    
+    // let cnt = 0;
+    // let intervalVal = setInterval(function() { // 이 만큼의 시간마다 반복
+    //     console.log("interval");
+    //     cnt++;
+    //     if (cnt == 5) {
+    //         clearInterval(intervalVal);
+    //     }
+    // }, 1000);
+
+
+    // function doubleIncrease(num) {
+    //     setTimeout(function() { // 이 만큼의 시간 후에 실행
+    //        return num * 2;
+    //     }, 1000);
+    // } // 안 됨!! 
+    
+    // 버튼 클릭 시 입력 받은 숫자가 매 초마다 배수를 출력
+    // $(`#expotentialGrowth`).click(function() {
+    //     let num = $(`#num`).val();
+    //     let doubleNum = doubleIncrease(num);
+    //     $(`#listOfMultiples`).append(doubleNum);
+    // }) // 안 됨!! doubleIncrease 는 1초 딜레이 있어서 append를 먼저 비동기적으로 실행해버림! => undefined가 됨
+
+
+    // 콜백함수 예제
+    // function doubleIncrease(num, callback) { 
+    //     setInterval(function() { 
+    //         let doubleNum = num * 2; // num을 2배로 증가시킨 값
+    //         callback(doubleNum); // 콜백 함수를 통해 doubleNum을 전달
+    //     }, 1000); // 이 만큼의 시간 후에 실행
+    // }
+
+    // // 버튼 클릭 3초 후 입력 받은 숫자가 매 초마다 배수를 출력
+    // $(`#expotentialGrowth`).click(function() {
+    //     let num = $(`#num`).val(); 
+
+    //     setTimeout(function() {
+    //         doubleIncrease(num, function(doubleNum) {
+    //             $(`#listOfMultiples`).append(`<li>${doubleNum}</li>`);
+    //         });
+    //     }, 3000)
+    // });
+
+
+    // 배수증가
+    let multipleNum = 0;
+    $(`#multipleIncrease`).click(function() {
+        let num = parseInt($(`#num`).val()); 
+
+        setTimeout(function() {
+            let interval = setInterval(function() { 
+                multipleNum += num; 
+                $(`#multipleResult`).append(`${multipleNum}<br>`);
+            }, 1000); 
+
+            setTimeout(function() {
+                clearInterval(interval);
+            }, 10000); // 그냥 10초 후에 멈추게 함
+
+        }, 3000)
+        
+    });
+
+    // 타이머시작
+    let timerInterval;
+    let currentNum = 0;
+    $(`#startTimer`).click(function() {
+        setTimeout(function() {
+            timerInterval = setInterval(function() {
+                $(`#timerResult`).html(currentNum++);
+            }, 1000)
+        }, 3000)
+    });
+
+    $(`#stopTimer`).click(function() {
+        setTimeout(function() {
+           clearInterval(timerInterval);
+           $(`#timerResult`).html("Timer Stopped");
+        }, 3000)
+    });
+
+
+
+    
+
+</script>
+</html>

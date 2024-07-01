@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>function</title>
+  </head>
+  <body>
+    제목
+    <input type="title" id="title"><br>
+    내용
+    <textarea id="content" rows="8" cols="30"></textarea><br>
+    <input type="button" id="inputBtn" value="수정">
+    <input type="button" id="goToNewsListPageBtn" value="목록">
+    </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script>
+  let no = location.href.split("?")[1];
+
+  $.ajax({
+    url:`http://localhost/newsSelect?no=${no}`,
+    data: {},
+        success: function(response) {
+            $("#title").val(response[0].title);
+            $("#content").val(response[0].content);
+          }
+        });
+
+      $("#inputBtn").click(function(){
+            let title = $("#title").val();
+            let content = $("#content").val();
+            $.ajax({
+                // 주소창에 쓰는방식. 쿼리스크링
+                url:`http://localhost/Update`,
+                data: {
+                    no: no,
+                    title: title,
+                    content: content
+                },
+                type: "PUT",
+                success: function(response) {
+                    console.log(response);
+                }
+            });
+        });
+
+
+
+
+//목록 버튼을 누르면 리스트로 돌아갈 수 있게
+      $("#goToNewsListPageBtn").click(function(){
+        location.href = "/newsList";
+      });
+    </script>
+</html>
