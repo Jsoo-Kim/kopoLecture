@@ -1,9 +1,12 @@
-<script setup> // App.vue 에 자식 컴포넌트가 2개! (HelloWorld 뷰와 TheWelcome 뷰가 페이지 안에서 좌, 우 2개로 나뉘어짐)
+<script setup> 
+// App.vue 에 자식 컴포넌트가 2개! (HelloWorld 뷰와 TheWelcome 뷰가 페이지 안에서 좌, 우 2개로 나뉘어짐)
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
-import { ref } from 'vue' // ref를 사용해야 '기본타입 자료형, object, array' 의 변경사항이 template에서도 적용됨
-import { reactive } from 'vue'; // reactive를 사용하면 .value 없이 사용 가능! 단, '기본타입 자료형' 에는 사용 못 하며 많이 쓰면 느려짐
+// ref를 사용해야 '기본타입 자료형, object, array' 의 변경사항이 template에서도 적용됨
+// reactive를 사용하면 .value 없이 사용 가능! 단, '기본타입 자료형' 에는 사용 못 하며 많이 쓰면 느려짐
+import { ref, reactive } from 'vue' 
 
+////// 변수 선언 영역 //////
 // ref
 const count = ref(0) // ref(객체)를 씌워야 template와 script의 변수가 서로 반응함(reactive) => MVVM 구조
 
@@ -21,7 +24,7 @@ const objectOfAttrs = {
   class: 'wrapper'
 }
 
-
+////// 함수 선언 영역 //////
 // function increment() {
 // } 요즘에 함수 선언 이렇게 안 함! 애로우 문법을 주로 씀
 const increment = () => {
@@ -42,7 +45,6 @@ const buttonClicked = () => {
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
-
       <!-- ref -->
       <button @click="increment">{{ count }}</button><br>
 
@@ -68,6 +70,7 @@ const buttonClicked = () => {
   <main>
     <TheWelcome />
   </main>
+
 </template>
 
 <style scoped>

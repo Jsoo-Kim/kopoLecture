@@ -1,0 +1,20 @@
+table {
+    width: 600px;
+    margin: 50px auto;
+    border-collapse: collapse;
+}
+
+td {
+    box-sizing: border-box;
+    width: 120px;
+    height: 60px;
+    border: 1px solid #999;
+}
+
+td.open {
+    background: lightblue;
+}
+
+td.bomb {
+    background: red;
+}
