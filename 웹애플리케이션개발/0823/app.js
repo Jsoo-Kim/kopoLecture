@@ -11,9 +11,9 @@ app.use(express.urlencoded({ extended: false })); // URL 인코딩된 데이터 
 
 app.listen(80);
 
+
 const mysql = require('mysql');
 const { log } = require('console');
-
 
 var connection = mysql.createConnection({
     host: 'localhost'

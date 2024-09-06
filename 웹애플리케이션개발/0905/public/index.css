@@ -1,0 +1,164 @@
+/* Reset some basic elements */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5; 
+    height: 100%;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.chat-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #333; 
+}
+
+h2 {
+    font-size: 1.2em;
+    color: #666; 
+}
+
+/* Room info styling */
+.room-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ececec; 
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.room-info div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#room-name {
+    font-size: 1.5em;
+    color: #2f4f4f; 
+    margin-bottom: 5px;
+}
+
+#user-num {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #495057; 
+}
+
+#user-list {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #6c757d; 
+}
+
+.select {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #bbb; 
+    font-size: 1em;
+    background-color: #fff; 
+}
+
+/* Chat wrapper styling */
+.chat-wrapper {
+    background-color: #ffffff; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); 
+}
+
+#messages {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#messages li {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: #333;
+    font-size: 1.1em;
+    clear: both; /* 플로팅 해제 */
+}
+
+/* 상대방 메시지 */
+.message-left {
+    background-color: #eee4de; 
+    float: left;
+    max-width: 70%;
+    border-radius: 10px 10px 10px 0px;
+}
+
+/* 내 메시지 */
+.message-right {
+    background-color: #faebd3; 
+    float: right;
+    max-width: 70%;
+    border-radius: 10px 10px 0px 10px;
+}
+
+/* 공지 메시지 */
+.notice-message {
+    background-color: #f1f1f1; 
+    color: #333; 
+    text-align: center;
+    clear: both;
+    margin: 0 auto;
+    max-width: 80%;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+form {
+    display: flex;
+    gap: 10px;
+}
+
+input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc; 
+    font-size: 1em;
+    background-color: #ffffff;
+}
+
+button {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: #b8795c; 
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ae704c; 
+}
+
+/* Hidden class for chat wrapper */
+.hidden {
+    display: none;
+}

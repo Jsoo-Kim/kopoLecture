@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>급식 메뉴판</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" href="/meal_survey.css">
+</head>
+
+<body>
+    <div class="menu-board">
+        <h1>이번 주 급식 메뉴</h1>
+        <div id="menu-container" class="menu-container"></div>
+
+        <button onclick="submitRatings()">만족도 제출</button>
+
+        <h2 id="chart-title" style="display: none;">급식 만족도 차트</h2>
+        <div id="chart_div"></div>
+    </div>
+
+    <script>
+        const menuContainer = document.getElementById('menu-container');
+        const chartTitle = document.getElementById('chart-title'); 
+        const ratings = {};
+
+        const fetchMenu = async () => {
+            try {
+                const response = await fetch('/menu');
+                const data = await response.json();
+
+                for (let dayIndex = 0; dayIndex < data.length; dayIndex++) {
+                    const item = data[dayIndex];
+                    const day = item.day;
+                    const menuItems = item.menu;
+
+                    if (day === '토요일' || day === '일요일') {
+                        continue;
+                    }
+
+                    ratings[day] = [];
+
+                    const dayColumn = document.createElement('div');
+                    dayColumn.className = 'day-column';
+
+                    const dayTitle = document.createElement('div');
+                    dayTitle.className = 'day-title';
+                    dayTitle.textContent = day;
+                    dayColumn.appendChild(dayTitle);
+
+                    const menuList = document.createElement('ul');
+                    menuList.className = 'menu-list';
+
+                    for (let menuIndex = 0; menuIndex < menuItems.length; menuIndex++) {
+                        const menu = menuItems[menuIndex];
+                        const menuItem = document.createElement('li');
+                        menuItem.className = 'menu-item';
+
+                        menuItem.innerHTML = `
+                            ${menu.trim()} 
+                            <select id="rating-${dayIndex}-${menuIndex}" class="rating-select">
+                                ${Array.from({ length: 11 }, (_, i) => `<option value="${i}">${i}</option>`).join('')}
+                            </select>
+                        `;
+
+                        menuList.appendChild(menuItem);
+                        ratings[day][menuIndex] = 0;
+                    }
+
+                    dayColumn.appendChild(menuList);
+                    menuContainer.appendChild(dayColumn);
+                }
+            } catch (error) {
+                console.error('Error fetching menu:', error);
+            }
+        };
+
+        const submitRatings = () => {
+            const days = Object.keys(ratings);
+
+            // 각 요일 급식 메뉴 별 만족도 점수
+            for (let dayIndex = 0; dayIndex < days.length; dayIndex++) {
+                const day = days[dayIndex];
+
+                for (let menuIndex = 0; menuIndex < ratings[day].length; menuIndex++) {
+                    const rating = document.getElementById(`rating-${dayIndex}-${menuIndex}`).value;
+                    ratings[day][menuIndex] = parseInt(rating);
+                }
+            }
+            
+            //차트 제목 표시
+            chartTitle.style.display = 'block';
+
+            drawChart();
+        };
+
+        const drawChart = () => {
+            google.charts.load('current', { packages: ['corechart'] });
+            google.charts.setOnLoadCallback(() => {
+                const data = new google.visualization.DataTable();
+                data.addColumn('string', '요일');
+                data.addColumn('number', '만족도');
+
+                // 요일 별 급식 만족도 평균 점수
+                Object.keys(ratings).forEach(day => {
+                    const dayRatings = ratings[day];
+                    const averageRating = dayRatings.reduce((sum, rating) => sum + rating, 0) / dayRatings.length;
+                    data.addRow([day, averageRating]);
+                });
+
+                const options = {
+                    title: '요일별 급식 평균 만족도',
+                    hAxis: { title: '요일' },
+                    vAxis: { title: '만족도', minValue: 0, maxValue: 10 },
+                    legend: { position: 'right' }
+                };
+
+                const chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+            });
+        };
+
+        fetchMenu();
+    </script>
+</body>
+
+</html>

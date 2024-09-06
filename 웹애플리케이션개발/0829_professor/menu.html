@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    메뉴
+    <div id="menuArea">
+
+    </div>
+    <input type="button" value="점수" id="scoreBtn">
+
+    <div id="chart_div"></div>
+</body>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+    let menus;
+    let dayKor = ["월", "화", "수", "목", "금"];
+    let avgScores = [];
+
+    $.ajax({
+        url: `http://localhost/getMenu`,
+        data: {},
+        success: function (res) {
+            menus = res;
+            console.log(menus);
+            for (let i = 0; i < menus.length; i++) {
+                $("#menuArea").append(`${dayKor[i]}요일<br>`);
+                for (let j = 0; j < menus[i]; j++) {
+                    $("#menuArea").append(`${menu[i][j]}
+                        <select id="score${i}_${j}">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                        <br>`);
+                }
+                $("#menuArea").append(`<br>`);
+            }
+        }
+    });
+
+    $("#scoreBtn").click(function () {
+        avgScores = [];
+        for (let i = 0; i < menus.length; i++) {
+            let dailyScore = 0;
+            for (let j = 0; j < menus[i].length; j++) {
+                dailyScore += Number($(`#score${i}_${j}`).val());
+            }
+            dailyScore /= menus[i].length;
+            avgScores.push([dayKor[i], dailyScore]);
+        }
+
+        google.charts.load('current', { packages: ['corechart', 'line'] });
+        google.charts.setOnLoadCallback(drawCurveTypes);
+
+        function drawCurveTypes() {
+            data = new google.visualization.DataTable();
+            data.addColumn('number', '요일');
+            data.addColumn('number', '만족도');
+            data.addRows(avgScores);
+
+            let options = {
+                hAxis: {
+                    title: 'Time',
+                },
+                vAxis: {
+                    title: 'Popularity'
+                },
+                series: {
+                    1: { curveType: 'function' },
+                }
+            };
+
+            let chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    });
+</script>
+
+</html>

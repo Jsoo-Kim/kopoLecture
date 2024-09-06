@@ -1,0 +1,107 @@
+table {
+    width: 80%;
+    margin: 50px auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    table-layout: fixed; /* 모든 셀이 동일한 너비를 가지도록 설정 */
+}
+
+td {
+    box-sizing: border-box;
+    padding: 0;
+    border: 2px solid #34495e;
+    background-color: #ecf0f1;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: relative;
+}
+
+td::before {
+    content: "";
+    display: block;
+    padding-top: 100%; /* 높이를 너비의 100%로 설정하여 정사각형을 만듦 */
+}
+
+td > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+td.open {
+    background: #3498db;
+    color: white;
+    transform: scale(1.1);
+}
+
+/* 폭발 애니메이션 적용 클래스 */
+.bomb {
+    position: relative;
+    animation: explosion 1s ease-out forwards;
+}
+
+/* "펑!" 텍스트 스타일 및 애니메이션 */
+.bomb::after {
+    content: "펑!";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    opacity: 0;
+    animation: popText 1s ease-out forwards;
+}
+
+/* 폭발 애니메이션 정의 */
+@keyframes explosion {
+    0% {
+        background-color: red;
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        background-color: orange;
+        transform: scale(1.5);
+        opacity: 0.8;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    }
+    100% {
+        background-color: yellow;
+        transform: scale(2);
+        opacity: 0;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* "펑!" 텍스트 팝업 애니메이션 */
+@keyframes popText {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+}
+
+/* 테이블 전체 스타일링 */
+table {
+    border-radius: 10px;
+    overflow: hidden;
+}

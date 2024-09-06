@@ -2,6 +2,9 @@
   <div class="hello">
     <h1>{{ props.msg }}</h1>
     <h1>{{ props.number }}</h1>
+    <!-- slot은 부모에서 전달 받은 부분 할당하는 영역-->
+    <slot></slot>
+    <slot></slot>
     <p>
       KOPO
     </p>
@@ -36,18 +39,25 @@ const props = defineProps({
 })
 
 onMounted(() => {
-  emit('send-message', '자식 컴포넌트에서 보낸 메시지1')
+  emit('send-message', '마운트 되는 순간 자식 컴포넌트에서 보냄(메시지1)')
 })
 
 const sendMsgToParent = () => {
-  emit('sendMsgToParent', '자식 컴포넌트에서 보낸 메시지2')
+  emit('sendMsgToParent', '버튼 클릭 시 자식 컴포넌트에서 보냄(메시지2)')
 }
 
 
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<!-- "scoped"를 적용하면 해당 컴포넌트에 한정되어 적용 -->
+<style scoped> 
+
+div {
+  background-color: #f5d682;
+  border: 1px solid red;
+}
+
 h3 {
   margin: 40px 0 0;
 }

@@ -1,0 +1,52 @@
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>게임 화면</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/game.css" /> 
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/game.js"></script>
+</head>
+<body>
+    <h2>현재 턴: ${users[turn]}</h2>
+    <table>
+        <c:forEach var="i" begin="0" end="${mapSize - 1}">
+            <tr>
+                <c:forEach var="j" begin="0" end="${mapSize - 1}">
+                    <td data-y="${i}" data-x="${j}"></td>
+                </c:forEach>
+            </tr>
+        </c:forEach>
+    </table>
+    
+    <audio id="explosion-sound" src="${pageContext.request.contextPath}/resources/sounds/explosion.mp3" preload="auto"></audio>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>게임 화면</title>
+    <link rel="stylesheet" th:href="@{/css/game.css}" />
+    
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js" 
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" 
+            crossorigin="anonymous"></script>
+
+    <script th:src="@{/js/game.js}"></script>
+</head>
+<body>
+    <h2 th:text="'현재 턴: ' + ${users[turn]}"></h2>
+    <table>
+        <tr th:each="i : ${#numbers.sequence(0, mapSize - 1)}">
+            <td th:each="j : ${#numbers.sequence(0, mapSize - 1)}"
+                th:data-y="${i}" th:data-x="${j}"></td>
+        </tr>
+    </table>
+    
+    <audio id="explosion-sound" th:src="@{/sounds/explosion.mp3}" preload="auto"></audio>
+</body>
+</html>

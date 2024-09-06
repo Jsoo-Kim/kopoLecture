@@ -1,0 +1,70 @@
+/* 전체 배경과 기본 설정 */
+body {
+    background-color: #34495e;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    padding: 50px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* 게임 종료 메시지 컨테이너 */
+.game-over-container {
+    background-color: #e74c3c;
+    padding: 30px;
+    border-radius: 15px;
+    display: inline-block;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    transform: scale(0.9);
+    animation: scaleUp 0.5s ease-out forwards;
+}
+
+/* 게임 종료 제목 */
+h1 {
+    font-size: 60px;
+    margin-bottom: 20px;
+    color: #f1c40f;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+/* 패배자 이름 표시 */
+h2 {
+    font-size: 40px;
+    margin-bottom: 50px;
+    color: #ecf0f1;
+}
+
+/* 다시 시작하기 버튼 */
+button {
+    padding: 15px 30px;
+    font-size: 24px;
+    background-color: #3498db;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+/* 컨테이너 나타날 때의 애니메이션 */
+@keyframes scaleUp {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
