@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="/css/edit_user.css">
+	<title>회원 정보 수정</title>
+</head>
+
+<body>
+	<h1>회원 정보 수정</h1>
+
+	<form action="/admin/edit_action" method="post">
+	    <!-- ID는 수정할 수 없으므로 hidden input으로 보냄 -->
+	    <input type="hidden" name="id" th:value="${user.id}" />
+	    
+	    <label for="name">이름:</label>
+	    <input type="text" id="name" name="name" th:value="${user.name}" required />
+	    
+	    <label for="sex">성별:</label>
+	    <select id="sex" name="sex" required>
+	        <option value="male" th:selected="${user.sex == 'male'}">남</option>
+	        <option value="female" th:selected="${user.sex == 'female'}">여</option>
+	    </select>
+	    
+	    <label for="address">주소:</label>
+	    <input type="text" id="address" name="address" th:value="${user.address}" />
+	    
+	    <label for="phone">연락처:</label>
+	    <input type="text" id="phone" name="phone" th:value="${user.phone}" />
+	    
+	    <input type="submit" value="수정 완료" />
+	</form>
+	
+	<!-- 비밀번호 변경 폼 -->
+	<h2>비밀번호 변경</h2>
+	<form action="/admin/edit_password_action" method="post">
+	    <!-- ID는 수정할 수 없으므로 hidden input으로 보냄 -->
+	    <input type="hidden" name="id" th:value="${user.id}" />
+	    
+	    <label for="password">새 비밀번호:</label>
+	    <input type="password" id="password" name="password" required />
+	    
+	    <label for="password2">새 비밀번호 확인:</label>
+	    <input type="password" id="password2" name="password2" required />
+	    
+	    <input type="submit" value="비밀번호 수정" />
+	</form>
+	
+	<div class="home-button-container">
+		<a href="/" class="home-btn">HOME</a>
+	</div>
+</body>

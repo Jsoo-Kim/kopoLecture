@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="/css/login.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<title>로그인</title>
+</head>
+
+<body>
+	<form action="email_login_action" method="post">
+		<input type="text" name="email" placeholder="이메일" />
+		<input type="password" name="password" placeholder="패스워드" />
+		<input type="submit" value="로그인" />
+	</form>
+	
+	<a href="/login" class="login">아이디로 로그인</a>
+
+	<div class="message success" th:if="${messageType == 'success'}" th:text="${message}"></div>
+	<div class="message error" th:if="${messageType == 'error'}" th:text="${message}"></div>
+
+	<script>
+		setTimeout(() => {
+			const message = document.querySelector('.message');
+			if (message) {
+				message.style.display = 'none';
+			}
+		}, 3000);
+	</script>
+</body>
+
+</html>

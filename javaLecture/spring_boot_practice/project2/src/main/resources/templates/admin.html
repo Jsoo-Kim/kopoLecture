@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="/css/admin.css">
+    <title>회원 관리</title>
+</head>
+<body>
+    <h1>회원 목록</h1>
+	<div class="home-button-container">
+		<a href="/" class="home-btn">HOME</a>
+	</div>	
+    <table>
+        <tr>
+            <th>아이디</th>
+            <th>이름</th>
+            <th>성별</th>
+            <th>주소</th>
+            <th>연락처</th>
+            <th>권한</th>
+            <th>관리</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.sex}"></td>
+            <td th:text="${user.address}"></td>
+            <td th:text="${user.phone}"></td>
+            <td th:text="${user.user_type}"></td>
+            <td>
+				<div class="action-buttons">
+				    <a th:href="@{/admin/edit/{id}(id=${user.id})}">수정</a>
+				    <form action="/delete_user" method="post" style="display:inline;">
+				        <input type="hidden" name="id" th:value="${user.id}">
+				        <input type="submit" value="삭제">
+				    </form>
+				</div>
+            </td>
+        </tr>
+    </table>
+	<div class="message success" th:if="${messageType == 'success'}" th:text="${message}"></div>
+	<div class="message error" th:if="${messageType == 'error'}" th:text="${message}"></div>
+	
+	<script>
+		setTimeout(() => {
+			const message = document.querySelector('.message');
+			if (message) {
+				message.style.display = 'none';
+			}
+		}, 3000);
+	</script>
+</body>
+</html>

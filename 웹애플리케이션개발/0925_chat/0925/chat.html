@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        #chatroom {
+            width: 600px;
+            margin-bottom: 2px;
+            display:flex;
+        }
+
+        #chats {
+            border: 1px solid black;
+            width: 375px;
+            height: 90vh;
+            overflow: scroll;
+            float: left;
+        }
+
+        #users {
+            border: 1px solid black;
+            border-left: none;
+            float: right;
+            width: 200px;
+            height: 90vh;
+        }
+
+        #message {
+            width: 400px;
+        }
+
+        .user {
+            padding: 4px;
+            background-color: #cecece;
+        }
+
+        #userCount {
+            padding: 5px;
+            background-color: black;
+            color: white;
+            border-bottom: 1px solid white;
+        }
+
+        .timeago {
+            color: #cecece;
+            float: right;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="chatroom" style="display:none;">
+    <div id="chats">
+
+    </div>
+    <div id="users">
+        <div id="userCount"><span id="count">0</span> Users Online</div>
+        <div id="connectedUserList"></div>
+    </div>
+
+</div>
+<div id="sendMsgArea" style="display:none;">
+    <input type="text" name="messages" id="message">
+    <input type="button" id="sendMsg" value="send">
+</div>
+
+<div id="loginArea">
+  <input type="text" id="loginId">
+  <input type="button" value="입장" id="loginBtn">
+</div>
+
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+  let socket;
+  $("#loginId").focus();
+  $("#loginId").on("keyup",function(key){         
+    if(key.keyCode==13){
+      $("#loginBtn").click();
+    } 
+  });
+
+
+  $("#loginBtn").click(function(){
+    $.ajax({
+      url:`http://localhost/login?loginId=${$("#loginId").val()}`,
+      data: {
+      },
+      success:function(response){
+        if(response.msg=="fail") {
+          alert("동일한 대화명이 존재합니다");
+          return;
+        }
+        else {
+
+          alert("로그인 성공");
+
+          let users = response.users;
+          $("#connectedUserList").append(`<div class="user"><b>${$("#loginId").val()}(나)<b></div>`);
+          for(let i=0;i<users.length;i++) {
+            let user = users[i];
+            $("#connectedUserList").append(`<div class="user" id="${user.loginId}">${user.loginId}</div>`);
+          }
+          $("#count").html(users.length + 1);
+          socket = io();
+          socket.emit('joinRoom', $("#loginId").val());
+          $("#chatroom").show();
+          $("#sendMsgArea").show();
+          $("#loginArea").hide();
+
+
+
+          $.ajax({
+            url:`http://localhost/getChatHistoryRecentTen`,
+            data: {
+            },
+            success:function(response){
+              for(let i=0;i<response.length;i++) {
+                let message = response[response.length-i-1];
+                console.log(message);
+                $("#chats").append(`<div class="message">${message.loginId} : ${message.message} </div>`);
+              }
+            }
+          });
+
+
+
+          $("#message").focus();
+          $("#message").on("keyup",function(key){         
+            if(key.keyCode==13){
+              $("#sendMsg").click();
+            } 
+          });
+        	// socket.on('b', function(msg){
+        	// 	console.log(msg);
+        	// });
+
+          socket.on('getMsg', function(messageInfo){
+            $("#chats").append(`<div class="message">${messageInfo.loginId} : ${messageInfo.message} </div>`);
+        	});
+
+          socket.on('userDisconnected', function(loginId){
+            $(`#${loginId}`).remove();
+            $("#chats").append(`<div class="message">=== ${loginId} 님이 퇴장하셨습니다 ===</div>`);
+            $("#count").html(Number($("#count").html())-1);
+        	});
+
+          socket.on('newUserConnected', function(loginId){
+            $("#connectedUserList").append(`<div class="user" id="${loginId}">${loginId}</div>`);
+            $("#chats").append(`<div class="message">=== ${loginId} 님이 입장하셨습니다 ===</div>`);
+            $("#count").html(Number($("#count").html())+1);
+        	});
+        }
+      }
+    });
+  });
+
+
+
+
+
+
+
+  $("#sendMsg").click(function(){
+    socket.emit('sendMsg', $("#message").val());
+    $("#chats").append(`<div class="message">나 : ${$("#message").val()} </div>`);
+    $("#message").val("");
+  });
+
+</script>
+</html>

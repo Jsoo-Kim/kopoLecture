@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/css/join.css">
+    <title>회원가입</title>
+</head>
+<body>
+    <div class="container">
+        <h1>회원 가입</h1>
+        <form action="join_action" method="post">
+            <input type="text" name="name" placeholder="이름" required/>
+            <input type="text" name="id" placeholder="아이디" required/>
+            <input type="password" name="password" placeholder="패스워드" required/>
+            <input type="password" name="password2" placeholder="패스워드 확인" required/>
+            <select name="sex">
+                <option value="남">남</option>
+                <option value="여">여</option>
+            </select>
+            <input type="text" name="address" placeholder="주소" />
+            <input type="text" name="phone" placeholder="연락처" />
+            <input type="submit" value="입력 완료" />
+        </form>
+		<a href="/email_join" class="email-join">이메일로 회원가입</a>
+        <div class="message success" th:if="${messageType == 'success'}" th:text="${message}"></div>
+        <div class="message error" th:if="${messageType == 'error'}" th:text="${message}"></div>
+    </div>
+	
+	<script>
+		setTimeout(() => {
+			const message = document.querySelector('.message');
+			if (message) {
+				message.style.display = 'none';
+			}
+		}, 3000);
+	</script>
+</body>
+</html>

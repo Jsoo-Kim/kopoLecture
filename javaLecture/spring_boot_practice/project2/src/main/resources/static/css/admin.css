@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.home-button-container {
+    text-align: center; 
+    margin-bottom: 20px; 
+}
+
+.home-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.home-btn:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 0 auto; /* 테이블을 좌우 중앙에 배치 */
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #007BFF;
+    color: white;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px; /* 수정과 삭제 버튼 사이 간격 */
+}
+
+a, input[type="submit"] {
+    display: inline-block;
+    background-color: #28a745; /* 수정 버튼은 녹색 */
+    color: white;
+    padding: 5px 15px; /* 패딩을 동일하게 설정 */
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px; /* 폰트 크기 동일하게 */
+}
+
+a:hover {
+    background-color: #218838;
+}
+
+input[type="submit"] {
+    background-color: #dc3545; /* 삭제 버튼은 빨간색 */
+}
+
+input[type="submit"]:hover {
+    background-color: #c82333;
+}
+
+/* 메시지 스타일 수정 */
+.message {
+    margin: 20px auto;  /* 상하 간격 및 좌우 중앙 정렬 */
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 80%;  /* 부모 요소의 80% 너비 */
+    max-width: 600px; /* 최대 너비 600px로 제한 */
+    box-sizing: border-box;
+}
+
+.message.success {
+    color: #28a745;
+    background-color: #e6ffe6;
+}
+
+.message.error {
+    color: #dc3545;
+    background-color: #ffe6e6;
+}

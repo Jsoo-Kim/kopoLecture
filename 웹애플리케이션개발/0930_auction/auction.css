@@ -1,0 +1,104 @@
+/* Global Styles */
+body {
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+h3 {
+    text-align: center;
+    color: #333;
+}
+
+.legend {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.well {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+label.lead {
+    font-weight: bold;
+}
+
+#car_brand, #registration_number, #HighestBid, #MyBid, #HighestBidder, #STATE {
+    font-weight: bold;
+    color: #000;
+}
+
+#biding_status, #cancel_bid_status, #withdraw_status {
+    color: #d9534f;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Buttons */
+.btn {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.btn-default {
+    background-color: #5bc0de;
+    border-color: #46b8da;
+    color: white;
+}
+
+.btn-default:hover {
+    background-color: #31b0d5;
+    border-color: #269abc;
+}
+
+.btn-danger {
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c9302c;
+    border-color: #ac2925;
+}
+
+/* Form Styling */
+.form-group input {
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+#valueValidation {
+    color: #d9534f;
+    font-size: 0.9em;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+/* Wallet and Bids Sections */
+#wallet_list, #wallet_bids, #auction_owner_operations {
+    margin-top: 20px;
+}
+
+#bid_list {
+    color: #5bc0de;
+    font-weight: bold;
+}
+
+#eventslog {
+    font-size: 0.9em;
+    color: #333;
+}
