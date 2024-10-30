@@ -21,25 +21,17 @@ public class User {
     }
     
     public User(String name, String id, String sex, String address, String phone) {
-    	this.name = name;
-    	this.id = id;
-    	this.sex = sex;
-    	this.address = address;
-    	this.phone = phone;
+        this(name, id, null, sex, address, phone, false);
     }
 
     public User(String name, String id, String password, String sex, String address, String phone) {
-        this.name = name;
-        this.id = id;
-        this.password = Sha256EncryptUtil.shaEncoder(password);
-        this.sex = sex;
-        this.address = address;
-        this.phone = phone;
-        this.user_type = "guest"; // 기본값은 일반 사용자
-        this.isEmailVerified = false;
+        this(name, null, password, sex, address, phone, false);
     }
     
     public User(String name, String email, String password, String sex, String address, String phone, Boolean isEmailVerified) {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be null or empty");
+        }
     	this.name = name;
     	this.email = email;
     	this.password = Sha256EncryptUtil.shaEncoder(password);

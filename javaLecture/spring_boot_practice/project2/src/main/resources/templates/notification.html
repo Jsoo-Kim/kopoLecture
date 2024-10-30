@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/css/notification.css">
+    <title>공지사항</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>공지사항</h1>
+
+        <div class="home-button-container">
+            <a href="/" class="home-btn">HOME</a>
+        </div>
+
+        <!-- 관리자 전용 게시글 작성 버튼 -->
+        <div th:if="${userType == 'admin'}" class="create-post-container">
+            <a href="/notification/create" class="create-post-btn">게시글 작성</a>
+        </div>
+
+        <!-- 공지사항 목록 -->
+        <div class="post-container">
+            <th:block th:each="notification : ${notifications}">
+                <div class="post-item">
+                    <h3>
+                        <a th:href="@{/notification/view/{id}(id=${notification.id})}" th:text="${notification.title}"></a>
+                    </h3>
+                    <p th:text="${notification.createdDate}"></p>
+                </div>
+            </th:block>
+        </div>
+    </div>
+</body>
+
+</html>

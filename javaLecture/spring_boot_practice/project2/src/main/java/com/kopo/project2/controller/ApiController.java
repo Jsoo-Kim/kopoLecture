@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class ApiController {
 //    @GetMapping("/create")
 //    public String createTable() {
-//        DB db = new DB();
+//        UserDB db = new UserDB();
 //        db.createTable();
 //        return "success";
 //    }

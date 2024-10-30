@@ -14,14 +14,15 @@
 			<a href="/logout" class="logout-btn">로그아웃</a>
 			<th:block th:if="${userType == 'admin'}">
 				<a href="/admin">회원 정보</a>
+				<a href="/notification">공지사항</a>
 			</th:block>
 			<th:block th:if="${userType == 'guest'}">
 				<a href="/mypage">내 정보</a>
+				<a href="/notification">공지사항</a>
 			</th:block>
 		</th:block>
 		<th:block th:if="${!isLogin}">
-			<a href="join">아이디로 회원 가입</a>
-			<a href="join_email">이메일로 회원 가입</a>
+			<a href="join">회원 가입</a>
 			<a href="login">로그인</a>
 		</th:block>
 	</div>

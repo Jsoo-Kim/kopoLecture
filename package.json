@@ -3,6 +3,7 @@
     "cheerio": "^1.0.0",
     "cors": "^2.8.5",
     "express": "^4.20.0",
+    "froala-editor": "^4.3.0",
     "http-proxy-middleware": "^3.0.0",
     "mysql": "^2.18.1",
     "request": "^2.88.2"

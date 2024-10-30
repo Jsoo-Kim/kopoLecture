@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>게시판 테스트</title>
+    <link rel="stylesheet" href="css/froala_editor.css">
+    <link rel="stylesheet" href="post.css">
+    <script src="js/froala_editor.min.js"></script>
+</head>
+<body>
+    <h2>제목</h2>
+    <input type="text" class="title" />
+    <h2>내용</h2>
+    <textarea id="f1"></textarea>
+    <script>
+        let editor = new FroalaEditor(`#f1`);
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/css/notification.css">
+    <title>공지사항 상세보기</title>
+</head>
+<body>
+    <div class="container">
+        <h1 th:text="${notification.title}"></h1>
+        <p class="post-meta" th:text="${notification.createdDate}"></p>
+        <div class="post-content" th:utext="${notification.content}"></div>
+
+        <div th:if="${userType == 'admin'}" class="admin-controls">
+            <a th:href="@{/notification/edit/{id}(id=${notification.id})}" class="edit-btn">수정</a>
+            <form th:action="@{/notification/delete/{id}(id=${notification.id})}" method="post" style="display: inline;">
+                <button type="submit" class="delete-btn">삭제</button>
+            </form>
+        </div>
+        <a href="/notification" class="back-btn">목록으로 돌아가기</a>
+    </div>
+</body>
+</html>

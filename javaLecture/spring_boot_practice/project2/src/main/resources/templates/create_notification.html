@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>공지사항 작성</title>
+    <link rel="stylesheet" href="/css/notification.css">
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>공지사항 작성</h1>
+        <form action="/notification/create" method="post">
+            <input type="text" name="title" placeholder="제목" required />
+            <textarea id="editor" name="content" required></textarea>
+            <input type="submit" value="작성 완료" />
+        </form>
+        <a href="/notification" class="back-btn">목록으로 돌아가기</a>
+    </div>
+
+    <script src="/js/ckeditor_init.js"></script>
+</body>
+</html>
